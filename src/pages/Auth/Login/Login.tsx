@@ -20,6 +20,16 @@ import { Checkbox } from "@/components/ui/checkbox"
 import InputWithIcon from "@/components/common/InputWithIcon"
 
 export default function Login() {
+  const email = "sohilawahed@gmail.com";
+
+  const subject = encodeURIComponent("Support Request");
+
+  const body = encodeURIComponent(`
+          Hello Super Admin,
+          I need help with: I want new account to join with your team.
+          Name: 
+          Email:
+          Thank you.`);
   return (
     <Card className="w-full sm:max-w-md rounded-xl px-4 py-8 bg-card shadow-lg">
       <CardHeader>
@@ -78,7 +88,7 @@ export default function Login() {
         </form>
       </CardContent>
       <CardFooter className="flex items-center justify-center">
-        <p className="">Don't have an account? <a className="text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all">Contact Administrator</a></p>
+        <p className="">Don't have an account? <a href={`mailto:${email}?subject=${subject}&body=${body}`} className="text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all">Contact Administrator</a></p>
       </CardFooter>
     </Card>
   )
