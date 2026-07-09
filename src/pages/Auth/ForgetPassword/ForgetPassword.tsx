@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import {
   Field,
+  FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
@@ -16,9 +17,25 @@ import { Link } from "react-router-dom"
 import { Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
+import * as z from 'zod'
+import { ForgetPasswordSchema } from "@/schemas/auth.schema"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 
 export default function ForgetPassword() {
+
+  type ForgetPasswordData = z.infer<typeof ForgetPasswordSchema>
+  const { register, handleSubmit, formState: { errors } } = useForm<ForgetPasswordData>({
+    defaultValues: {
+      email: ''
+    },
+    resolver: zodResolver(ForgetPasswordSchema)
+  })
+
+  const onSubmit = (data: ForgetPasswordData) => {
+    console.log(data)
+  }
 
   return (
     <Card className="w-full sm:max-w-md rounded-xl px-4 py-8 bg-card shadow-lg">
@@ -36,25 +53,30 @@ export default function ForgetPassword() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="email" className="text-foreground">Email Address</FieldLabel>
+              <FieldLabel htmlFor="email" className="text-foreground font-semibold">Email Address</FieldLabel>
               <InputWithIcon
                 startIcon={<Mail size={18} />}
-                id="email" type="email" placeholder="Enter your email"
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                {...register('email')}
               />
+              {errors.email && <FieldError errors={[errors.email]} />}
+
             </Field>
           </FieldGroup>
           <Field>
             <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-             Send Reset Link
+              Send Reset Link
             </Button>
           </Field>
         </form>
       </CardContent>
       <CardFooter className="flex items-center justify-center border-none pt-0">
-      <Link to={'/auth/login'} className="text-primary text-sm font-medium cursor-pointer">Back to Login</Link>
+        <Link to={'/auth/login'} className="text-primary text-sm font-medium cursor-pointer">Back to Login</Link>
       </CardFooter>
     </Card>
   )

@@ -3,6 +3,7 @@ import {
   Field,
   FieldGroup,
   FieldLabel,
+  FieldError,
 } from "@/components/ui/field"
 import {
   Card,
@@ -16,11 +17,30 @@ import { Link } from "react-router-dom"
 import { Eye, Lock, Mail, Siren, User } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
-import { Checkbox } from "@/components/ui/checkbox"
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "@/schemas/auth.schema"
 
 export default function Register() {
 
-  const anchorCss = `text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all`
+  type RegisterFormData = z.infer<typeof registerSchema>
+
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    },
+    resolver: zodResolver(registerSchema)
+  })
+
+  const onSubmit = (data: RegisterFormData) => {
+
+    console.log(data)
+
+  }
 
   return (
     <Card className="w-full sm:max-w-md rounded-xl px-4 py-8 bg-card shadow-lg">
@@ -38,53 +58,71 @@ export default function Register() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="userName" className="text-foreground">User Name</FieldLabel>
+            <Field aria-invalid={!!errors.username}>
+              <FieldLabel htmlFor="username" className="text-foreground font-semibold ">
+                Username
+              </FieldLabel>
               <InputWithIcon
                 startIcon={<User size={18} />}
-                id="userName" type="text" placeholder="Your Name"
+                id="username"
+                type="text"
+                placeholder="Your username"
+                {...register('username')}
               />
+              {errors.username &&
+                <FieldError errors={[errors.username]} />
+              }
+
             </Field>
-            <Field>
-              <FieldLabel htmlFor="email" className="text-foreground">Email Address</FieldLabel>
+
+            <Field aria-invalid={!!errors.email}>
+              <FieldLabel htmlFor="email" className="text-foreground font-semibold">
+                Email Address
+              </FieldLabel>
               <InputWithIcon
                 startIcon={<Mail size={18} />}
-                id="email" type="email" placeholder="john@example.com"
+                id="email"
+                type="email"
+                placeholder="john@example.com"
+                {...register('email')}
               />
+              {errors.email &&
+                <FieldError errors={[errors.email]} />
+              }
             </Field>
+
             <div className="grid grid-cols-2 gap-4">
-              <Field>
-                <FieldLabel htmlFor="password">
+              <Field aria-invalid={!!errors.password}>
+                <FieldLabel htmlFor="password" className="text-foreground font-semibold">
                   Password
                 </FieldLabel>
                 <InputWithIcon
                   startIcon={<Lock size={18} />}
                   endIcon={<Eye size={18} />}
                   id="password" type="password" placeholder="••••••••"
+                  {...register('password')}
                 />
+                {errors.password &&
+                  <FieldError errors={[errors.password]} />
+                }
               </Field>
-              <Field>
-                <FieldLabel htmlFor="confirmPassword">
+              <Field aria-invalid={!!errors.confirmPassword}>
+                <FieldLabel htmlFor="confirmPassword" className="text-foreground font-semibold">
                   Confirm Password
                 </FieldLabel>
                 <InputWithIcon
                   startIcon={<Lock size={18} />}
                   endIcon={<Eye size={18} />}
                   id="confirmPassword" type="password" placeholder="••••••••"
+                  {...register('confirmPassword')}
                 />
+                {errors.confirmPassword &&
+                  <FieldError errors={[errors.confirmPassword]} />
+                }
               </Field>
             </div>
-            <Field orientation="horizontal">
-              <Checkbox id="policyAndServices" />
-              <FieldLabel
-                htmlFor="policyAndServices"
-                className="font-normal"
-              >
-                I agree to the <a className={anchorCss}>Terms of Services</a> and <a className={anchorCss}>Privacy Policy</a>
-              </FieldLabel>
-            </Field>
           </FieldGroup>
           <Field>
             <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">

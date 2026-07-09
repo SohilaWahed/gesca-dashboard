@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import {
     Field,
+    FieldError,
     FieldGroup,
     FieldLabel,
 } from "@/components/ui/field"
@@ -16,9 +17,26 @@ import { Link } from "react-router-dom"
 import { Eye, Lock, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
-
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ResetPasswordSchema } from "@/schemas/auth.schema"
+import * as z from 'zod'
 
 export default function ResetPassword() {
+
+    type ResetPasswordData = z.infer<typeof ResetPasswordSchema>
+
+    const { register, handleSubmit, formState: { errors } } = useForm<ResetPasswordData>({
+        defaultValues: {
+            password: '',
+            confirmPassword: ''
+        },
+        resolver: zodResolver(ResetPasswordSchema)
+    })
+
+    const onSubmit = (data: ResetPasswordData) => {
+        console.log(data)
+    }
 
     return (
         <Card className="w-full sm:max-w-md rounded-xl px-4 py-8 bg-card shadow-lg">
@@ -36,31 +54,40 @@ export default function ResetPassword() {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <FieldGroup>
                         <Field>
-                            <FieldLabel htmlFor="newPassword">
+                            <FieldLabel htmlFor="newPassword" className="text-foreground font-semibold">
                                 New Password
                             </FieldLabel>
                             <InputWithIcon
                                 startIcon={<Lock size={18} />}
                                 endIcon={<Eye size={18} />}
-                                id="newPassword" type="password" placeholder="••••••••"
+                                id="newPassword"
+                                type="password"
+                                placeholder="••••••••"
+                                {...register('password')}
                             />
+                            {errors.password && <FieldError errors={[errors.password]} />}
                         </Field>
                         <Field>
-                            <FieldLabel htmlFor="confirmPassword">
+                            <FieldLabel htmlFor="confirmPassword" className="text-foreground font-semibold">
                                 Confirm Password
                             </FieldLabel>
                             <InputWithIcon
                                 startIcon={<Lock size={18} />}
                                 endIcon={<Eye size={18} />}
-                                id="confirmPassword" type="password" placeholder="••••••••"
+                                id="confirmPassword"
+                                type="password"
+                                placeholder="••••••••"
+                                {...register('confirmPassword')}
                             />
+                            {errors.confirmPassword && <FieldError errors={[errors.confirmPassword]} />}
                         </Field>
                     </FieldGroup>
                     <Field>
-                        <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+                        <Button type="submit"
+                            className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
                             Reset Password
                         </Button>
                     </Field>

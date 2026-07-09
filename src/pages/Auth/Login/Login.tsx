@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
@@ -18,7 +18,10 @@ import LanguageBtn from "@/components/common/LanguageBtn"
 import { Link } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import InputWithIcon from "@/components/common/InputWithIcon"
-
+import * as z from 'zod'
+import { loginSchema } from '../../../schemas/auth.schema';
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 export default function Login() {
   const email = "sohilawahed@gmail.com";
 
@@ -30,6 +33,20 @@ export default function Login() {
           Name: 
           Email:
           Thank you.`);
+
+  type LoginSchemaData = z.infer<typeof loginSchema>
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      email: '',
+      password: ''
+    },
+    resolver: zodResolver(loginSchema)
+  })
+
+  const onSubmit = (data: LoginSchemaData) => {
+    console.log(data)
+  }
   return (
     <Card className="w-full sm:max-w-md rounded-xl px-4 py-8 bg-card shadow-lg">
       <CardHeader>
@@ -46,29 +63,34 @@ export default function Login() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="email" className="text-foreground">Email Address</FieldLabel>
+            <Field aria-invalid={!!errors.email}>
+              <FieldLabel htmlFor="email" className="text-foreground font-semibold">Email Address</FieldLabel>
               <InputWithIcon
                 startIcon={<Mail size={18} />}
-                id="email" type="email" placeholder="john@example.com"
+                id="email"
+                type="email"
+                placeholder="john@example.com"
+                {...register("email")}
               />
+              {errors.email && <FieldError errors={[errors.email]} />}
             </Field>
             <Field>
               <FieldLabel htmlFor="password" className="flex items-center justify-between">
-                <span>Password</span>
+                <span className="text-foreground font-semibold">Password</span>
                 <Link to={'/auth/forget-password'} className="text-primary font-medium">ForgotPassword?</Link>
               </FieldLabel>
 
               <InputWithIcon
                 startIcon={<Lock size={18} />}
                 endIcon={<Eye size={18} />}
-                id="password" type="password" placeholder="••••••••"
+                id="password"
+                type="password" 
+                placeholder="••••••••"
+                {...register("password")}
               />
-              <FieldDescription className="text-muted-foreground">
-                Must be at least 8 characters long.
-              </FieldDescription>
+              {errors.password && <FieldError errors={[errors.password]} />}
             </Field>
             <Field orientation="horizontal">
               <Checkbox id="keep-login" />
