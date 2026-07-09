@@ -18,22 +18,25 @@ import { Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import * as z from 'zod'
-import { ForgetPasswordSchema } from "@/schemas/auth.schema"
+import { ForgotPasswordSchema } from "@/schemas/auth.schema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslation } from "react-i18next"
 
 
-export default function ForgetPassword() {
+export default function ForgotPassword() {
 
-  type ForgetPasswordData = z.infer<typeof ForgetPasswordSchema>
-  const { register, handleSubmit, formState: { errors } } = useForm<ForgetPasswordData>({
+  const { t } = useTranslation(['forgotPassword', 'common' , 'login'])
+
+  type ForgotPasswordData = z.infer<typeof ForgotPasswordSchema>
+  const { register, handleSubmit, formState: { errors } } = useForm<ForgotPasswordData>({
     defaultValues: {
       email: ''
     },
-    resolver: zodResolver(ForgetPasswordSchema)
+    resolver: zodResolver(ForgotPasswordSchema)
   })
 
-  const onSubmit = (data: ForgetPasswordData) => {
+  const onSubmit = (data: ForgotPasswordData) => {
     console.log(data)
   }
 
@@ -43,40 +46,39 @@ export default function ForgetPassword() {
         <div className="flex items-center justify-between mb-2">
           <CardTitle className="logo capitalize text-primary flex items-center gap-3 select-none">
             <Siren size={28} />
-            <span className=' text-lg lg:text-xl font-semibold tracking-wide'>vigilant pharma</span>
+            <span className=' text-lg lg:text-xl font-semibold tracking-wide'>{t("common:logo")}</span>
           </CardTitle>
           <LanguageBtn />
         </div>
         <CardDescription className="text-muted-foreground">
-          <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">Forgot your password?</span>
-          Enter the email address associated with your vigilant pharma account and we'll send you a link to reset your password.
+          <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("forgotPassword:forgot_your_password")}</span>
+{t("forgotPassword:credientails")}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="email" className="text-foreground font-semibold">Email Address</FieldLabel>
+              <FieldLabel htmlFor="email" className="text-foreground font-semibold">{t("login:email")}</FieldLabel>
               <InputWithIcon
                 startIcon={<Mail size={18} />}
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t("forgotPassword:enter_email")}
                 {...register('email')}
               />
               {errors.email && <FieldError errors={[errors.email]} />}
-
             </Field>
           </FieldGroup>
           <Field>
             <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-              Send Reset Link
+              {t("forgotPassword:send_link")}
             </Button>
           </Field>
         </form>
       </CardContent>
       <CardFooter className="flex items-center justify-center border-none pt-0">
-        <Link to={'/auth/login'} className="text-primary text-sm font-medium cursor-pointer">Back to Login</Link>
+        <Link to={'/auth/login'} className="text-primary text-sm font-medium cursor-pointer">{t("forgotPassword:back_login")}</Link>
       </CardFooter>
     </Card>
   )

@@ -21,8 +21,11 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/auth.schema"
+import { useTranslation } from "react-i18next"
 
 export default function Register() {
+
+  const { t } = useTranslation(["register", "common"])
 
   type RegisterFormData = z.infer<typeof registerSchema>
 
@@ -48,13 +51,13 @@ export default function Register() {
         <div className="flex items-center justify-between mb-2">
           <CardTitle className="logo capitalize text-primary flex items-center gap-3 select-none">
             <Siren size={28} />
-            <span className=' text-lg lg:text-xl font-semibold tracking-wide'>vigilant pharma</span>
+            <span className=' text-lg lg:text-xl font-semibold tracking-wide'>{t("common:logo")}</span>
           </CardTitle>
           <LanguageBtn />
         </div>
         <CardDescription className="text-muted-foreground">
-          <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">Register</span>
-          Please enter your credentials to access your workspce
+          <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("register:create_account")}</span>
+          {t("register:credientails")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -62,7 +65,7 @@ export default function Register() {
           <FieldGroup>
             <Field aria-invalid={!!errors.username}>
               <FieldLabel htmlFor="username" className="text-foreground font-semibold ">
-                Username
+                {t("register:username")}
               </FieldLabel>
               <InputWithIcon
                 startIcon={<User size={18} />}
@@ -79,7 +82,7 @@ export default function Register() {
 
             <Field aria-invalid={!!errors.email}>
               <FieldLabel htmlFor="email" className="text-foreground font-semibold">
-                Email Address
+                {t("register:email")}
               </FieldLabel>
               <InputWithIcon
                 startIcon={<Mail size={18} />}
@@ -96,7 +99,7 @@ export default function Register() {
             <div className="grid grid-cols-2 gap-4">
               <Field aria-invalid={!!errors.password}>
                 <FieldLabel htmlFor="password" className="text-foreground font-semibold">
-                  Password
+                  {t("register:password")}
                 </FieldLabel>
                 <InputWithIcon
                   startIcon={<Lock size={18} />}
@@ -110,7 +113,7 @@ export default function Register() {
               </Field>
               <Field aria-invalid={!!errors.confirmPassword}>
                 <FieldLabel htmlFor="confirmPassword" className="text-foreground font-semibold">
-                  Confirm Password
+                  {t("register:confirm_password")}
                 </FieldLabel>
                 <InputWithIcon
                   startIcon={<Lock size={18} />}
@@ -126,13 +129,13 @@ export default function Register() {
           </FieldGroup>
           <Field>
             <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-              Register
+                {t("register:register")}
             </Button>
           </Field>
         </form>
       </CardContent>
       <CardFooter className="flex items-center justify-center">
-        <p className="">Already have an account? <Link to={'/auth/login'} className="text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all ">Login</Link></p>
+        <p>{t("register:already_have_account")} <Link to={'/auth/login'} className="text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all ">{t("register:login")}</Link></p>
       </CardFooter>
     </Card>
   )

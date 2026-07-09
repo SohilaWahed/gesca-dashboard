@@ -10,6 +10,6 @@ export const ROUTES = {
     SETTINGS: "/settings",
     LOGIN: "login",
     REGISTER: "register",
-    FORGET_PASSWORD: "forget-password",
+    FORGOT_PASSWORD: "forgot-password",
     RESET_PASSWORD:"reset-password"
 }

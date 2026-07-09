@@ -22,7 +22,12 @@ import * as z from 'zod'
 import { loginSchema } from '../../../schemas/auth.schema';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslation } from "react-i18next"
+
 export default function Login() {
+
+const {t} = useTranslation(["login","common"])
+
   const email = "sohilawahed@gmail.com";
 
   const subject = encodeURIComponent("Support Request");
@@ -47,26 +52,27 @@ export default function Login() {
   const onSubmit = (data: LoginSchemaData) => {
     console.log(data)
   }
+
   return (
     <Card className="w-full sm:max-w-md rounded-xl px-4 py-8 bg-card shadow-lg">
       <CardHeader>
         <div className="flex items-center justify-between mb-2">
           <CardTitle className="logo capitalize text-primary flex items-center gap-3 select-none">
             <Siren size={28} />
-            <span className=' text-lg lg:text-xl font-semibold tracking-wide'>vigilant pharma</span>
+            <span className=' text-lg lg:text-xl font-semibold tracking-wide'>{t("common:logo")}</span>
           </CardTitle>
           <LanguageBtn />
         </div>
         <CardDescription className="text-muted-foreground">
-          <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">Login</span>
-          Please enter your credentials to access your workspce
+          <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("login:login_logo")}</span>
+          {t("login:credientails")}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
             <Field aria-invalid={!!errors.email}>
-              <FieldLabel htmlFor="email" className="text-foreground font-semibold">Email Address</FieldLabel>
+              <FieldLabel htmlFor="email" className="text-foreground font-semibold">{t("login:email")}</FieldLabel>
               <InputWithIcon
                 startIcon={<Mail size={18} />}
                 id="email"
@@ -78,8 +84,8 @@ export default function Login() {
             </Field>
             <Field>
               <FieldLabel htmlFor="password" className="flex items-center justify-between">
-                <span className="text-foreground font-semibold">Password</span>
-                <Link to={'/auth/forget-password'} className="text-primary font-medium">ForgotPassword?</Link>
+                <span className="text-foreground font-semibold">{t("login:password")}</span>
+                <Link to={'/auth/forgot-password'} className="text-primary font-medium">{t("login:forgot_password")}</Link>
               </FieldLabel>
 
               <InputWithIcon
@@ -98,19 +104,19 @@ export default function Login() {
                 htmlFor="keep-login"
                 className="font-normal"
               >
-                Remember me for 30 days
+                {t("login:remember_me")}
               </FieldLabel>
             </Field>
           </FieldGroup>
           <Field>
             <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-              Login
+              {t("login:login")}
             </Button>
           </Field>
         </form>
       </CardContent>
       <CardFooter className="flex items-center justify-center">
-        <p className="">Don't have an account? <a href={`mailto:${email}?subject=${subject}&body=${body}`} className="text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all">Contact Administrator</a></p>
+        <p>{t("login:donot_have_account")} <a href={`mailto:${email}?subject=${subject}&body=${body}`} className="text-primary font-medium cursor-pointer underline-offset-4 hover:underline transition-all">{t("login:contact_adiminstrator")}</a></p>
       </CardFooter>
     </Card>
   )

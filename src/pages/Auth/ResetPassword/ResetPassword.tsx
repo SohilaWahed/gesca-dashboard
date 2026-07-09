@@ -21,8 +21,11 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ResetPasswordSchema } from "@/schemas/auth.schema"
 import * as z from 'zod'
+import { useTranslation } from "react-i18next"
 
 export default function ResetPassword() {
+
+  const { t } = useTranslation(['forgotPassword', 'common'])
 
     type ResetPasswordData = z.infer<typeof ResetPasswordSchema>
 
@@ -44,13 +47,13 @@ export default function ResetPassword() {
                 <div className="flex items-center justify-between mb-2">
                     <CardTitle className="logo capitalize text-primary flex items-center gap-3 select-none">
                         <Siren size={28} />
-                        <span className=' text-lg lg:text-xl font-semibold tracking-wide'>vigilant pharma</span>
+                        <span className=' text-lg lg:text-xl font-semibold tracking-wide'>{t("common:logo")}</span>
                     </CardTitle>
                     <LanguageBtn />
                 </div>
                 <CardDescription className="text-muted-foreground">
-                    <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">New Password</span>
-                    Please choose a secure password for your vigilant pharma account.
+                    <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("forgotPassword:new_password_logo")}</span>
+                   {t("forgotPassword:credientails_reset")}
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -58,7 +61,7 @@ export default function ResetPassword() {
                     <FieldGroup>
                         <Field>
                             <FieldLabel htmlFor="newPassword" className="text-foreground font-semibold">
-                                New Password
+                                {t("forgotPassword:new_password")}
                             </FieldLabel>
                             <InputWithIcon
                                 startIcon={<Lock size={18} />}
@@ -72,7 +75,7 @@ export default function ResetPassword() {
                         </Field>
                         <Field>
                             <FieldLabel htmlFor="confirmPassword" className="text-foreground font-semibold">
-                                Confirm Password
+                                {t("forgotPassword:confirm_new_password")}
                             </FieldLabel>
                             <InputWithIcon
                                 startIcon={<Lock size={18} />}
@@ -88,13 +91,13 @@ export default function ResetPassword() {
                     <Field>
                         <Button type="submit"
                             className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-                            Reset Password
+                            {t("forgotPassword:reset_password")}
                         </Button>
                     </Field>
                 </form>
             </CardContent>
             <CardFooter className="flex items-center justify-center border-none pt-0">
-                <Link to={'/auth/login'} className="text-primary text-sm font-medium cursor-pointer">Back to Login</Link>
+                <Link to={'/auth/login'} className="text-primary text-sm font-medium cursor-pointer">{t("forgotPassword:back_login")}</Link>
             </CardFooter>
         </Card>
     )

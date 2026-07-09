@@ -1,0 +1,11 @@
+{
+    "create_account": "إنشاء حساب",
+    "credientails":"أنشئ حسابك للبدء",
+    "username": "اسم المستخدم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "register":"تسجيل",
+    "already_have_account":"لديك حساب بالفعل؟",
+    "login":"تسجيل الدخول"
+}

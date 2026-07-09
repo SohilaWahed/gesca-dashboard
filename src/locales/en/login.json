@@ -1,3 +1,11 @@
 {
-    "title": "Login"
+    "login_logo": "Login",
+    "credientails": "Please enter your credentials to access your workspce",
+    "email": "Email Address",
+    "password": "Password",
+    "forgot_password": "ForgotPassword?",
+    "remember_me": "Remember me for 30 days",
+    "login": "Login",
+    "donot_have_account":"Don't have an account? " ,
+    "contact adiminstrator": "Contact Administrator"
 }

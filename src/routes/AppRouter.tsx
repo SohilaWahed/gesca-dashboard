@@ -13,7 +13,7 @@ import Products from '../pages/Products/Products';
 import AuthLayout from '../pages/Auth/AuthLayout';
 import Login from '../pages/Auth/Login/Login';
 import Register from '../pages/Auth/Register/Register';
-import ForgetPassword from '../pages/Auth/ForgetPassword/ForgetPassword';
+import ForgotPassword from '../pages/Auth/ForgotPassword/ForgotPassword';
 import ResetPassword from '@/pages/Auth/ResetPassword/ResetPassword';
 
 export default function AppRouter() {
@@ -36,7 +36,7 @@ export default function AppRouter() {
             path: '/auth', element: <AuthLayout />, children: [
                 { path: ROUTES.LOGIN, element: <Login /> },
                 { path: ROUTES.REGISTER, element: <Register /> },
-                { path: ROUTES.FORGET_PASSWORD, element: <ForgetPassword /> },
+                { path: ROUTES.FORGOT_PASSWORD, element: <ForgotPassword /> },
                 { path: ROUTES.RESET_PASSWORD, element: <ResetPassword /> },
 
             ]

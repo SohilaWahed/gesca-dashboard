@@ -25,7 +25,7 @@ export const loginSchema = z.object({
     password: z.string().min(8, 'Wrong password')
 })
 
-export const ForgetPasswordSchema = z.object({
+export const ForgotPasswordSchema = z.object({
      email: z.email("Invalid email"),
 })
 
