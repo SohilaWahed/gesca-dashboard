@@ -1,0 +1,17 @@
+{
+    "select theme":"Select Theme",
+    "dir":"ltr",
+    "dark":"Dark",
+    "light":"Light",
+    "system":"Sytem Mode",
+    "save": "Save",
+    "save changes": "Save Changes",
+    "delete": "Delete",
+    "update": "Update",
+    "see all": "See All",
+    "search":"Search Here....",
+    "notifications":"Notifications",
+    "lang":"Languages",
+    "theme":"Theme"
+
+}
