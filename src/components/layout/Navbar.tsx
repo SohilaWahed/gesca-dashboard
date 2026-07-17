@@ -1,4 +1,4 @@
-import { Bell, Menu, MonitorCog, Moon, Search, Sun, SunMoon } from "lucide-react";
+import { Bell, Menu, MonitorCog, Moon, Sun, SunMoon } from "lucide-react";
 import { type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,22 +19,20 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip"
+import SearchInput from "../common/SearchInput";
 
+const menuItemClass = `group cursor-pointer text-muted-foreground transition-colors duration-200
+   focus:bg-menu-hover focus:text-primary data-[highlighted]:bg-menu-hover data-[highlighted]:text-primary`;
 
 export default function Navbar({ setIsOpen }: { setIsOpen: Dispatch<SetStateAction<boolean>> }) {
 
   const { t } = useTranslation("common");
   const { theme, setTheme, isTheme } = useTheme()
-  const menuItemClass = `group cursor-pointer text-muted-foreground transition-colors duration-200
-   focus:bg-menu-hover focus:text-primary data-[highlighted]:bg-menu-hover data-[highlighted]:text-primary`;
 
   return (
-    <nav className="bg-surface text-foreground h-16 flex items-center justify-between gap-4 px-4 sm:px-8 lg:px-16 xl:px-20 border border-border">
-      <Menu className="md:hidden cursor-pointer  hover:text-primary transition-colors" size={28} onClick={() => setIsOpen((prev: boolean) => !prev)} />
-      <div className="w-full max-w-md bg-background px-4 py-2 border border-input rounded-3xl flex items-center gap-3">
-        <Search className="text-muted-foreground" size={20} />
-        <input type="text" className="outline-0 bg-transparent text-foreground placeholder:text-muted-foreground" placeholder={t('search')} />
-      </div>
+    <nav className="sticky top-0 z-50 bg-surface text-foreground h-16 flex items-center justify-between gap-4 px-4 sm:px-8 border border-border">
+      <Menu className="md:hidden cursor-pointer text-muted-foreground  hover:text-primary transition-colors" size={20} onClick={() => setIsOpen((prev: boolean) => !prev)} />
+      <SearchInput text={t('search')} />
       <div className="icons flex items-center gap-5">
         <TooltipProvider>
           <Tooltip>

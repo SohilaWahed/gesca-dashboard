@@ -10,7 +10,8 @@ import enRegister from '../locales/en/register.json'
 import arRegister from '../locales/ar/register.json'
 import enForgotPassword from '../locales/en/forgotPassword.json'
 import arForgotPassword from '../locales/ar/forgotPassword.json'
-
+import enDashboard from '../locales/en/dashboard.json'
+import arDashboard from '../locales/ar/dashboard.json'
 
 i18n.use(initReactI18next).init({
     resources:{
@@ -19,14 +20,16 @@ i18n.use(initReactI18next).init({
             common:enCommon,
             login:enLogin,
             register:enRegister,
-            forgotPassword:enForgotPassword
+            forgotPassword:enForgotPassword,
+            dashboard:enDashboard
         },
         ar:{
             sidebar:arSidebar,
             common:arCommon,
             login:arLogin,
             register:arRegister,
-            forgotPassword:arForgotPassword
+            forgotPassword:arForgotPassword,
+            dashboard:arDashboard
         }
     },
     lng:localStorage.getItem('lang') || 'en',

@@ -1,3 +1,80 @@
 {
-    "title": "Dashboard"
+  "title": "لوحة التحكم",
+  "welcome": "مرحبًا بعودتك، إليك نظرة عامة على أداء العمل اليوم.",
+  "summaryCards": {
+    "hospitals": "المستشفيات",
+    "doctors": "الأطباء",
+    "employees": "الموظفون",
+    "products": "المنتجات",
+    "todayVisits": "زيارات اليوم",
+    "pendingReports": "التقارير المعلقة",
+    "pendingTasks": "المهام المعلقة",
+    "contractsWaiting": "العقود قيد الانتظار",
+    "thisMonth": "هذا الشهر",
+    "today": "اليوم"
+  },
+  "performance": {
+    "title": "نظرة عامة على الأداء",
+    "visits": "الزيارات",
+    "sales": "المبيعات",
+    "contracts": "العقود",
+    "reports": "التقارير",
+    "weekly": "أسبوعي",
+    "monthly": "شهري",
+    "yearly": "سنوي",
+    "days": {
+      "mon": "الإثنين",
+      "tue": "الثلاثاء",
+      "wed": "الأربعاء",
+      "thu": "الخميس",
+      "fri": "الجمعة",
+      "sat": "السبت",
+      "sun": "الأحد"
+    },
+    "months": {
+      "jan": "يناير",
+      "feb": "فبراير",
+      "mar": "مارس",
+      "apr": "أبريل",
+      "may": "مايو",
+      "jun": "يونيو"
+    },
+    "completedVisits": "الزيارات المكتملة",
+    "plannedVisits": "الزيارات المخطط لها",
+    "actualSales": "المبيعات الفعلية",
+    "targetSales": "المبيعات المستهدفة",
+    "signedContracts": "العقود الموقعة",
+    "plannedContracts": "العقود المخطط لها",
+    "approvedReports": "التقارير المعتمدة",
+    "submittedReports": "التقارير المقدمة"
+  },
+  "topProducts": {
+    "title": "أكثر {{count}} منتجات مبيعًا (هذا الأسبوع)",
+    "centerLabel": "المبيعات",
+    "viewAll": "عرض جميع المنتجات"
+  },
+  "todaySchedule": {
+    "title": "جدول اليوم",
+    "representative": "المندوب",
+    "status": "الحالة",
+    "location": "الموقع الحالي",
+    "visits": "زيارات اليوم",
+    "progress": "التقدم"
+  },
+  "recentActivity": {
+    "title": "آخر الأنشطة"
+  },
+  "topEmployees": {
+    "title": "أفضل الموظفين (هذا الأسبوع)",
+    "employee": "الموظف",
+    "visits": "الزيارات",
+    "rate": "التقييم"
+  },
+  "monitoring": {
+    "title": "المتابعة المباشرة",
+    "map": "الخريطة"
+  },
+  "common": {
+    "viewAll": "عرض الكل"
+  }
 }

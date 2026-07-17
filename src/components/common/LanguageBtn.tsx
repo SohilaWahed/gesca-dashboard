@@ -14,7 +14,7 @@ export default function LanguageBtn() {
     return (
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     <button
                         onClick={() => changeLang(i18n.language)}
                         className=" flex items-center gap-1 cursor-pointer text-muted-foreground hover:text-primary transition-colors">

@@ -1,0 +1,80 @@
+{
+  "title": "Dashboard",
+  "welcome": "Welcome back, here's your business overview for today.",
+  "summaryCards": {
+    "hospitals": "Hospitals",
+    "doctors": "Doctors",
+    "employees": "Employees",
+    "products": "Products",
+    "todayVisits": "Today's Visits",
+    "pendingReports": "Pending Reports",
+    "pendingTasks": "Pending Tasks",
+    "contractsWaiting": "Contracts Waiting",
+    "thisMonth": "this month",
+    "today": "today"
+  },
+  "performance": {
+    "title": "Performance Overview",
+    "visits": "Visits",
+    "sales": "Sales",
+    "contracts": "Contracts",
+    "reports": "Reports",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "completedVisits": "Completed Visits",
+    "plannedVisits": "Planned Visits",
+    "actualSales": "Actual Sales",
+    "targetSales": "Target Sales",
+    "signedContracts": "Signed Contracts",
+    "plannedContracts": "Planned Contracts",
+    "approvedReports": "Approved Reports",
+    "submittedReports": "Submitted Reports",
+    "days": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    },
+    "months": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun"
+    }
+  },
+  "topProducts": {
+    "title": "Top {{count}} Selling Products (This Week)",
+    "centerLabel": "Sales",
+    "viewAll": "View All Products"
+  },
+  "todaySchedule": {
+    "title": "Today's Schedule",
+    "representative": "Representative",
+    "status": "Status",
+    "location": "Current Location",
+    "visits": "Today's Visits",
+    "progress": "Progress"
+  },
+  "recentActivity": {
+    "title": "Recent Activity"
+  },
+  "topEmployees": {
+    "title": "Top Employees (This Week)",
+    "employee": "Employee",
+    "visits": "Visits",
+    "rate": "Rate"
+  },
+  "monitoring": {
+    "title": "Live Monitoring",
+    "map": "Map"
+  },
+  "common": {
+    "viewAll": "View All"
+  }
+}

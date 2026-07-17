@@ -9,6 +9,23 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 
+type links = {
+  title: string,
+  icon: ReactNode,
+  label: string
+}
+
+const links: links[] = [{ title: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
+{ title: 'employees', label: 'Employees', icon: <Users size={20} /> },
+{ title: 'hospitals', label: 'Hospitals', icon: <Hospital size={20} /> },
+{ title: 'doctors', label: 'Doctors', icon: <UserStar size={20} /> },
+{ title: 'products', label: 'Products', icon: <Boxes size={20} /> },
+{ title: 'tasks', label: 'Tasks', icon: <ClipboardList size={20} /> },
+{ title: 'monitoring', label: 'Monitoring', icon: <Eye size={20} /> },
+{ title: 'reports', label: 'Reports', icon: <BookCopy size={20} /> },
+{ title: 'settings', label: 'Settings', icon: <Settings size={20} /> }]
+
+
 export default function Sidebar({ isOpen }: { isOpen: boolean }) {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -17,30 +34,14 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
       : "text-muted-foreground hover:bg-hover hover:text-primary"
     }`;
 
-  interface links {
-    title: string,
-    icon: ReactNode,
-    label: string
-  }
-  const links: links[] = [{ title: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
-  { title: 'employees', label: 'Employees', icon: <Users size={20} /> },
-  { title: 'hospitals', label: 'Hospitals', icon: <Hospital size={20} /> },
-  { title: 'doctors', label: 'Doctors', icon: <UserStar size={20} /> },
-  { title: 'products', label: 'Products', icon: <Boxes size={20} /> },
-  { title: 'tasks', label: 'Tasks', icon: <ClipboardList size={20} /> },
-  { title: 'monitoring', label: 'Monitoring', icon: <Eye size={20} /> },
-  { title: 'reports', label: 'Reports', icon: <BookCopy size={20} /> },
-  { title: 'settings', label: 'Settings', icon: <Settings size={20} /> }]
-
-
   const { t, i18n } = useTranslation("sidebar")
 
   return (
-    <aside className={` ${isOpen ? 'block' : "hidden"} md:block bg-surface border-r border-border w-20 lg:w-64 px-4 py-6 lg:px-6 flex flex-col justify-between fixed top-16 bottom-0  md:sticky md:top-0 z-50 `}>
+    <aside className={` ${isOpen ? 'block' : "hidden"} md:block bg-surface border-r border-border w-20 lg:w-64 px-4 py-6 lg:px-6 flex flex-col justify-between fixed top-16 bottom-0 md:top-0 z-50 `}>
       <h1 className="logo capitalize text-primary hidden md:flex items-center justify-center lg:justify-start gap-2 mb-8"> <Siren size={28} /><span className='hidden lg:block text-lg lg:text-xl font-bold tracking-wide'>vigilant pharma</span></h1>
       <TooltipProvider>
         <ul className="navigation text-muted-foreground flex flex-col gap-2 flex-1 ">
-          {links.map((link , index) => <li key={index}>
+          {links.map((link, index) => <li key={index}>
             <Tooltip>
               <TooltipTrigger className='w-full'>
                 <NavLink to={`/${link.title}`} className={navLinkClass} aria-label={link.label}>

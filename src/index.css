@@ -188,6 +188,9 @@
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.08);
   --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.12);
+
+  /* scroll */
+  --scroll:#64748b
 }
 
 .dark {
@@ -259,7 +262,7 @@
   --color-foreground: var(--foreground);
 
   --color-surface: var(--surface);
-  
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
@@ -302,6 +305,8 @@
   --color-menu-hover: var(--menu-hover);
   --color-menu-active: var(--menu-active);
 
+  --color-scroll:var(--scroll)
+
 }
 
 @layer base {
@@ -315,5 +320,23 @@
 
   html {
     @apply font-sans;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-primary);
   }
 }

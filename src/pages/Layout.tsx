@@ -8,9 +8,9 @@ export default function Layout() {
   return (
     <div className="bg-background flex min-h-screen">
       <Sidebar isOpen={isOpen} />
-      <div className="flex-1">
+      <div className={`flex-1 md:ps-20 lg:ps-64`}>
         <Navbar setIsOpen={setIsOpen} />
-        <Outlet />
+       <div className=" px-4 sm:px-8 py-4"> <Outlet /></div>
       </div>
     </div>
   )

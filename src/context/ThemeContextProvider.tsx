@@ -1,4 +1,4 @@
-import type { Theme } from '@/types/theme'
+import type { Theme } from '@/types/theme.type'
 import { useEffect, useState, type ReactNode } from 'react'
 import { ThemeContext } from './contexts'
 
