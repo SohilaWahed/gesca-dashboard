@@ -1,3 +1,74 @@
 {
-    "title": "Monitorng"
+  "title": "Monitoring",
+  "live": "Live",
+
+  "lastSync": "Last Sync: {{time}}",
+
+  "stats": {
+    "employees": "Employees",
+    "active": "Active",
+    "atHospital": "At Hospital",
+    "atDoctor": "At Doctor",
+    "onTheWay": "On The Way",
+    "offline": "Offline"
+  },
+
+  "map": {
+    "search": "Search employee name...",
+    "status": "All Status",
+    "role": "All Roles",
+    "refresh": "Refresh"
+  },
+
+  "sidebar": {
+    "title_one": "Employee",
+    "title_other": "Employees",
+    "search": "Search employee...",
+    "empty": "No employees found"
+  },
+
+  "locationType": {
+    "hospital": "Hospital",
+    "doctor": "Doctor",
+    "office": "Office",
+    "route": "Route",
+    "break": "Break",
+    "offline": "Offline"
+  },
+
+  "status": {
+    "allStatus": "All Status",
+    "atHospital": "At Hospital",
+    "atDoctor": "At Doctor",
+    "onTheWay": "On The Way",
+    "available": "Available",
+    "offline": "Offline",
+    "onBreak": "On Break"
+  },
+
+  "roles": {
+    "allRoles": "All Roles",
+    "medicalRepresentative": "Medical Representative",
+    "manager": "Area Manager"
+  },
+
+  "sort": {
+    "placeholder": "Sort By",
+    "latest": "Latest Update",
+    "nameAsc": "Name (A-Z)",
+    "nameDesc": "Name (Z-A)",
+    "nearest": "Nearest"
+  },
+
+  "actions": {
+    "viewProfile": "View Profile"
+  },
+
+  "time": {
+    "justNow": "Just now",
+    "minuteAgo_one": "{{count}} min ago",
+    "minuteAgo_other": "{{count}} mins ago",
+    "hourAgo_one": "{{count}} h ago",
+    "hourAgo_other": "{{count}} hrs ago"
+  }
 }

@@ -1,0 +1,74 @@
+{
+  "title": "المتابعة",
+  "live": "مباشر",
+
+  "lastSync": "آخر مزامنة: {{time}}",
+
+  "stats": {
+    "employees": "الموظفون",
+    "active": "النشطون",
+    "atHospital": "داخل المستشفى",
+    "atDoctor": "عند الطبيب",
+    "onTheWay": "في الطريق",
+    "offline": "غير متصل"
+  },
+
+  "map": {
+    "search": "ابحث باسم الموظف...",
+    "status": "كل الحالات",
+    "role": "كل الأدوار",
+    "refresh": "تحديث"
+  },
+
+  "sidebar": {
+    "title_one": "موظف",
+    "title_other": "موظفون",
+    "search": "ابحث عن موظف...",
+    "empty": "لا يوجد موظفون"
+  },
+
+  "locationType": {
+    "hospital": "مستشفى",
+    "doctor": "طبيب",
+    "office": "المكتب",
+    "route": "الطريق",
+    "break": "استراحة",
+    "offline": "غير متصل"
+  },
+
+  "status": {
+    "allStatus": "كل الحالات",
+    "atHospital": "داخل المستشفى",
+    "atDoctor": "عند الطبيب",
+    "onTheWay": "في الطريق",
+    "available": "متاح",
+    "offline": "غير متصل",
+    "onBreak": "في استراحة"
+  },
+
+  "roles": {
+    "allRoles": "كل الموظفين",
+    "medicalRepresentative": "مندوب طبي",
+    "manager": "مدير منطقة"
+  },
+
+  "sort": {
+    "placeholder": "ترتيب حسب",
+    "latest": "آخر تحديث",
+    "nameAsc": "الاسم (أ → ي)",
+    "nameDesc": "الاسم (ي → أ)",
+    "nearest": "الأقرب"
+  },
+
+  "actions": {
+    "viewProfile": "عرض الملف الشخصي"
+  },
+
+  "time": {
+    "justNow": "الآن",
+    "minuteAgo_one": "منذ دقيقة",
+    "minuteAgo_other": "منذ {{count}} دقائق",
+    "hourAgo_one": "منذ ساعة",
+    "hourAgo_other": "منذ {{count}} ساعات"
+  }
+}

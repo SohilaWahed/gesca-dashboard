@@ -18,6 +18,9 @@ import {
   Field,
 } from "@/components/ui/field"
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { formatTime } from '@/services/formatNumberLang';
+import { formatNumber } from '../../services/formatNumberLang';
 
 
 const allStatus = [{ label: "All Status", value: "allStatus" }, { label: "At Doctor", value: "atDoctor" },
@@ -27,9 +30,9 @@ const allStatus = [{ label: "All Status", value: "allStatus" }, { label: "At Doc
 { label: "available", value: "available" },
 { label: "Offline", value: "offline" }]
 
-const allRoles = [{ label: "All Roles", value: "allroles" },
-{ label: "Medical Representative", value: "Medical Representative" },
-{ label: "Manager", value: "Manager" }]
+const allRoles = [{ label: "All Roles", value: "allRoles" },
+{ label: "Medical Representative", value: "medicalRepresentative" },
+{ label: "Manager", value: "manager" }]
 
 const sortList = [{ label: 'Recently Updated', value: 'latest' },
 { label: 'A → Z', value: 'nameAsc' },
@@ -40,9 +43,11 @@ const sortList = [{ label: 'Recently Updated', value: 'latest' },
 
 export default function Monitoring() {
 
+    const {t , i18n} =useTranslation("monitoring")
+
   const [search, setSearch] = useState<string>('')
   const [status, setStatus] = useState<LiveMonitoringStatus | "allStatus">("allStatus")
-  const [role, setRole] = useState<LiveMonitoringRole | "allroles">("allroles")
+  const [role, setRole] = useState<LiveMonitoringRole | "All Roles">("All Roles")
   const [statusList, setStatusList] = useState<LiveMonitoringStatus | "allStatus">("allStatus")
   const [sort, setSort] = useState<SortType>("latest");
 
@@ -58,7 +63,7 @@ export default function Monitoring() {
         status === "allStatus" || emp.status === status;
 
       const matchesRole =
-        role === "allroles" || emp.role === role;
+        role === "All Roles" || emp.role === role;
 
       return matchesStatus && matchesRole;
     });
@@ -71,7 +76,6 @@ export default function Monitoring() {
       Math.pow(lng - 31.2616, 2)
     )
   }
-
   const filterAndSortList = (): LiveMonitoring[] => {
 
     let filtertList = liveMonitoringData.filter((emp) =>
@@ -100,18 +104,20 @@ export default function Monitoring() {
 
   }
 
-
   return (
     <>
       <header className='mb-6 flex items-center justify-between'>
         <div className='flex items-center gap-4'>
-          <h2 className="text-2xl font-bold">Mointoring</h2>
-          <div className='rounded-xl p-1'><span className='h-2 w-2 rounded-full block'></span><span className='upercase'>live</span></div>
+          <h2 className="text-2xl font-bold">{t("title")}</h2>
+          <div className='rounded-xl bg-green-100/50 text-green-700 flex items-center gap-1 px-2 py-1'>
+            <span className='h-2 w-2 rounded-full block bg-green-700'></span>
+            <span className='upercase'>{t("live")}</span>
+          </div>
 
         </div>
         <div className='bg-card text-muted-foreground rounded-xl flex items-center gap-2 px-4 py-2'>
           <RefreshCw size={18} />
-          <p className='text-sm'>Last Sync: 11:42:30 Am </p>
+          <p className='text-sm'>{t("lastSync",{ time: formatTime(new Date(),i18n.language ) })} </p>
         </div>
       </header>
 
@@ -122,7 +128,7 @@ export default function Monitoring() {
           </div>
 
           <div className="actions mb-6 flex items-center gap-4 flex-wrap sm:flex-nowrap justify-center">
-            <SearchInput text='Search employee name...' state={search} setState={setSearch} />
+            <SearchInput text={t("map.search")} state={search} setState={setSearch} />
             <div className='flex items-center gap-4 grow'>
               <Field>
                 <Select defaultValue={allStatus[0].value} onValueChange={(value) => setStatus(value as LiveMonitoringStatus)}>
@@ -131,19 +137,19 @@ export default function Monitoring() {
                   </SelectTrigger>
                   <SelectContent position="popper" className="min-w-26 rounded-md cursor-pointer border-border bg-popover text-popover-foreground shadow-md">
                     <SelectGroup>
-                      {allStatus.map((status, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={status.value}>{status.label}</SelectItem>)}
+                      {allStatus.map((status, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={status.value}>{t(`status.${status.value}`)}</SelectItem>)}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               </Field>
               <Field>
-                <Select defaultValue={allRoles[0].value} onValueChange={(value) => setRole(value as LiveMonitoringRole)}>
+                <Select defaultValue={allRoles[0].label} onValueChange={(value) => setRole(value as LiveMonitoringRole)}>
                   <SelectTrigger className="rounded-md bg-popover text-popover-foreground capitalize">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent position="popper" className="min-w-26 rounded-md cursor-pointer border-border bg-popover text-popover-foreground shadow-md">
                     <SelectGroup>
-                      {allRoles.map((role, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={role.value}>{role.label}</SelectItem>)}
+                      {allRoles.map((role, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={role.label}>{t(`roles.${role.value}`)}</SelectItem>)}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -168,7 +174,7 @@ export default function Monitoring() {
 
         <div className='col-span-12 xl:col-span-3 px-4 pb-2 rounded-xl bg-card border border-border overflow-y-auto relative h-[80vh]'>
           <div className="header flex items-center justify-between sticky top-0 inset-x-0 bg-card py-3 z-30">
-            <h3 className='font-semibold'>Employees ({liveMonitoringData.length})</h3>
+            <h3 className='font-semibold'>{t("stats.employees")} ({formatNumber(liveMonitoringData.length , i18n.language)})</h3>
             <div className='flex items-center gap-2'>
 
               <Field>
@@ -178,7 +184,7 @@ export default function Monitoring() {
                   </SelectTrigger>
                   <SelectContent position="popper" className="min-w-26 rounded-md cursor-pointer border-border bg-popover text-popover-foreground shadow-md">
                     <SelectGroup>
-                      {sortList.map((sort, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={sort.value}>{sort.label}</SelectItem>)}
+                      {sortList.map((sort, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={sort.value}>{t(`sort.${sort.value}`)}</SelectItem>)}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -192,7 +198,7 @@ export default function Monitoring() {
                   </SelectTrigger>
                   <SelectContent position="popper" className="min-w-26 rounded-md cursor-pointer border-border bg-popover text-popover-foreground shadow-md">
                     <SelectGroup>
-                      {allStatus.map((status, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={status.value}>{status.label}</SelectItem>)}
+                      {allStatus.map((status, id) => <SelectItem key={id} className="capitalize cursor-pointer" value={status.value}>{t(`status.${status.value}`)}</SelectItem>)}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
