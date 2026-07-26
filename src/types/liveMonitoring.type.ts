@@ -1,36 +1,5 @@
 import type { LucideIcon } from "lucide-react";
 
-export interface LiveMonitoring {
-  id: number;
-  employeeId: number;
-  employeeName: string;
-  avatar: string;
-
-  status:
-    | "atHospital"
-    | "atDoctor"
-    | "onTheWay"
-    | "available"
-    | "offline"
-    | "onBreak";
-
-  location: {
-    lat: number;
-    lng: number;
-    name: string;
-    address: string;
-    type:
-      | "Hospital"
-      | "Doctor"
-      | "Office"
-      | "Route"
-      | "Break"
-      | "Offline";
-  };
-
-  lastUpdate: string;
-}
-
 export type LiveMonitoringStatus =
   | "atDoctor"
   | "atHospital"
@@ -39,18 +8,44 @@ export type LiveMonitoringStatus =
   | "available"
   | "offline";
 
+export type LiveMonitoringRole = "Medical Representative" | "Manager"
 
-  export type MonitoringStatusConfig = {
+export interface LiveMonitoring {
+  id: number;
+  employeeId: number;
+  employeeName: string;
+  avatar: string;
+
+  status: LiveMonitoringStatus;
+  role: LiveMonitoringRole
+  location: {
+    lat: number;
+    lng: number;
+    name: string;
+    address: string;
+    type:
+    | "Hospital"
+    | "Doctor"
+    | "Office"
+    | "Route"
+    | "Break"
+    | "Offline";
+  };
+
+  lastUpdate: string;
+}
+
+
+export type MonitoringStatusConfig = {
   label: string;
   icon: LucideIcon;
-  span:string;
+  span: string;
   color: string;
   bg: string;
+  hex: string
 }
 
 export type LiveMonitoringConfig = Record<LiveMonitoringStatus, MonitoringStatusConfig>
-
-
 
 export type LiveMonitoringStat =
   | "employees"
@@ -58,7 +53,8 @@ export type LiveMonitoringStat =
   | "atHospital"
   | "atDoctor"
   | "onTheWay"
-  | "offline";
+  | "offline"
+  | "onBreak";
 
 export type MonitoringStatConfig = {
   label: string;
@@ -72,4 +68,10 @@ export type LiveMonitoringStatsConfig = Record<
   MonitoringStatConfig
 >;
 
-export type MonitoringStats = {title:string, value:number}
+export type MonitoringStats = { title: string, value: number }
+
+export type SortType =
+  | "latest"
+  | "nameAsc"
+  | "nameDesc"
+  | "nearest";

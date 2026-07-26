@@ -17,8 +17,11 @@ export interface DashboardStats {
 
     color:
     | "primary"
-    | "success"
-    | "warning"
-    | "destructive"
-    | "info";
+    | "violet"
+    | "amber"
+    | "emerald"
+    | "lime"
+    | "rose"
+    | "orange"
+    | "gray"
 }

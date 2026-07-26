@@ -19,7 +19,7 @@ const dashboardStats: DashboardStats[] = [
       period: "thisMonth",
       trend: "up",
       percentage:6.9,
-      color: "primary",
+      color: "violet",
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ const dashboardStats: DashboardStats[] = [
       period: "thisMonth",
       trend: "up",
       percentage:4.3,
-      color: "success",
+      color: "lime",
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ const dashboardStats: DashboardStats[] = [
       period: "thisMonth",
       trend: "up",
       percentage:4.3,
-      color: "success",
+      color: "primary",
     },
     {
       id: 4,
@@ -52,7 +52,7 @@ const dashboardStats: DashboardStats[] = [
       period: "thisMonth",
       trend: "down",
       percentage:4.3,
-      color: "info",
+      color: "amber",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ const dashboardStats: DashboardStats[] = [
       value: 48,
       icon: CalendarCheck,
       subtitle: "60% completed",
-      color: "info",
+      color: "gray",
     },
     {
       id: 6,
@@ -68,7 +68,7 @@ const dashboardStats: DashboardStats[] = [
       value: 7,
       icon: FileText,
       subtitle: "Need your review",
-      color: "destructive",
+      color: "orange",
     },
     {
       id: 7,
@@ -76,7 +76,7 @@ const dashboardStats: DashboardStats[] = [
       value: 13,
       icon: ClipboardList,
       subtitle: "High priority",
-      color: "warning",
+      color: "emerald",
     },
     {
       id: 8,
@@ -84,7 +84,7 @@ const dashboardStats: DashboardStats[] = [
       value: 4,
       icon: Handshake,
       subtitle: "Awaiting approval",
-      color: "primary",
+      color: "rose",
     },
   ];
  export default dashboardStats 

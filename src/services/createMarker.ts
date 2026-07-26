@@ -1,8 +1,10 @@
-import { markerConfig } from "@/mock/liveMonitoring";
-import type { LiveMonitoringType } from "@/types/liveMonitoring.type";
+import { liveMonitoringConfig } from "@/mock/liveMonitoring";
+import type { LiveMonitoringStatus } from "@/types/liveMonitoring.type";
+
+
 import L from "leaflet";
 
-export default function createMarker(status: LiveMonitoringType) {
+export default function createMarker(status: LiveMonitoringStatus) {
   return L.divIcon({
     className: "",
     html: `
@@ -10,10 +12,10 @@ export default function createMarker(status: LiveMonitoringType) {
         style="
           width:12px;
           height:12px;
-          background:${markerConfig[status].color};
+          background:${liveMonitoringConfig[status].hex};
           border:2px solid white;
           border-radius:9999px;
-          box-shadow:0 0 0 4px ${markerConfig[status].color}33;
+          box-shadow:0 0 0 4px ${liveMonitoringConfig[status].color}33;
         "
       ></div>
     `,

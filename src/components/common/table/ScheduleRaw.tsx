@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { liveMonitoringConfig } from '@/mock/liveMonitoring'
 import { Badge } from "@/components/ui/badge"
 import useFormatter from '@/hooks/useFormatter'
+import avatarName from '@/services/avatarName'
 
 export default function ScheduleRaw({ employee }: { employee: Employee }) {
     
@@ -12,12 +13,12 @@ const format = useFormatter()
 
     return (
         <TableRow className='shadow-sm'>
-
             <TableCell>
                 <div className="flex items-center gap-3">
                     <Avatar>
                         <AvatarImage src={employee.name} />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarFallback>{avatarName(employee.name)}</AvatarFallback>
+                       
                     </Avatar>
                     <div>
                         <p className='font-semibold'>{employee.name}</p>
@@ -41,9 +42,7 @@ const format = useFormatter()
             </TableCell>
 
             <TableCell>
-
                 {format.number(employee.completedVisits)} / {format.number(employee.totalVisits)}
-
             </TableCell>
 
         </TableRow>

@@ -2,36 +2,50 @@ import { MoveDown, MoveUp } from 'lucide-react';
 import type { DashboardStats } from "@/types/dashboard.type";
 import { useTranslation } from 'react-i18next';
 import useFormatter from '@/hooks/useFormatter';
+import { cn } from '@/lib/utils';
 
 
 const colors = {
     primary: {
-        icon: "text-primary",
-        bg: "bg-primary/10",
+        color: "text-blue-600",
+        bg: "bg-blue-600/10",
     },
-    success: {
-        icon: "text-success",
-        bg: "bg-success/10",
+    violet: {
+        color: "text-violet-600",
+        bg: "bg-violet-600/10",
     },
-    warning: {
-        icon: "text-warning",
-        bg: "bg-warning/10",
+    amber: {
+        color: "text-amber-600",
+        bg: "bg-amber-600/10",
     },
-    destructive: {
-        icon: "text-destructive",
-        bg: "bg-destructive/10",
+    emerald: {
+        color: "text-emerald-600",
+        bg: "bg-emerald-600/10",
     },
-    info: {
-        icon: "text-info",
-        bg: "bg-info/10",
+    rose: {
+        color: "text-rose-600",
+        bg: "bg-rose-600/10",
     },
+    lime: {
+        color: "text-lime-600",
+        bg: "bg-lime-600/10",
+    },
+    orange: {
+        color: "text-orange-600",
+        bg: "bg-orange-600/10",
+    },
+    gray: {
+        color: "text-gray-600",
+        bg: "bg-gray-600/10",
+    }
+
 };
 
 export default function StatisticalCard({ data }: { data: DashboardStats }) {
 
     const Icon = data.icon;
     const bg = colors[data.color].bg
-    const text = colors[data.color].icon
+    const text = colors[data.color].color
     const { t, i18n } = useTranslation("dashboard");
     const format = useFormatter()
 
@@ -46,7 +60,7 @@ export default function StatisticalCard({ data }: { data: DashboardStats }) {
                 </span>}
             </div>
             <div className=' flex flex-col gap-4 items-center'>
-                <div className={`icon w-10 h-10 rounded-md flex justify-center items-center ${bg} ${text}`}>
+                <div className={cn(`icon w-10 h-10 rounded-md flex justify-center items-center` , text , bg )}>
                     <Icon size={20} />
                 </div>
                 {data.trend &&

@@ -8,6 +8,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Ahmed Khaled",
     avatar: "/avatars/1.png",
     status: "atHospital",
+    role: "Medical Representative",
     location: {
       lat: 30.04442,
       lng: 31.23571,
@@ -24,6 +25,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Sara Mohamed",
     avatar: "/avatars/2.png",
     status: "atDoctor",
+    role: "Medical Representative",
     location: {
       lat: 30.05948,
       lng: 31.26204,
@@ -40,6 +42,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Omar Tarek",
     avatar: "/avatars/3.png",
     status: "onTheWay",
+    role: "Manager",
     location: {
       lat: 30.01306,
       lng: 31.20885,
@@ -56,6 +59,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Mariam Hassan",
     avatar: "/avatars/4.png",
     status: "available",
+    role: "Medical Representative",
     location: {
       lat: 30.08295,
       lng: 31.33003,
@@ -72,6 +76,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Youssef Adel",
     avatar: "/avatars/5.png",
     status: "atDoctor",
+    role: "Manager",
     location: {
       lat: 29.97923,
       lng: 31.13420,
@@ -88,6 +93,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Nour Ali",
     avatar: "/avatars/6.png",
     status: "atHospital",
+    role: "Manager",
     location: {
       lat: 31.20009,
       lng: 29.91874,
@@ -104,6 +110,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Mohamed Samy",
     avatar: "/avatars/7.png",
     status: "onBreak",
+    role: "Manager",
     location: {
       lat: 30.58856,
       lng: 31.50204,
@@ -120,6 +127,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Fatma Ibrahim",
     avatar: "/avatars/8.png",
     status: "offline",
+    role: "Medical Representative",
     location: {
       lat: 31.04095,
       lng: 31.37847,
@@ -136,6 +144,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Ali Hassan",
     avatar: "/avatars/9.png",
     status: "atHospital",
+    role: "Medical Representative",
     location: {
       lat: 30.59649,
       lng: 32.27146,
@@ -152,6 +161,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Heba Mahmoud",
     avatar: "/avatars/10.png",
     status: "atDoctor",
+    role: "Medical Representative",
     location: {
       lat: 30.78651,
       lng: 30.99949,
@@ -168,6 +178,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Khaled Ashraf",
     avatar: "/avatars/11.png",
     status: "available",
+    role: "Medical Representative",
     location: {
       lat: 30.59649,
       lng: 30.98763,
@@ -184,6 +195,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Eman Salah",
     avatar: "/avatars/12.png",
     status: "onTheWay",
+    role: "Manager",
     location: {
       lat: 30.92752,
       lng: 31.47790,
@@ -200,6 +212,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Mahmoud Adel",
     avatar: "/avatars/13.png",
     status: "atDoctor",
+    role: "Medical Representative",
     location: {
       lat: 27.18096,
       lng: 31.18368,
@@ -216,6 +229,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Asmaa Mostafa",
     avatar: "/avatars/14.png",
     status: "atHospital",
+    role: "Manager",
     location: {
       lat: 26.55695,
       lng: 31.69478,
@@ -232,6 +246,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Mostafa Ali",
     avatar: "/avatars/15.png",
     status: "available",
+    role: "Manager",
     location: {
       lat: 24.08894,
       lng: 32.89983,
@@ -248,6 +263,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Reem Hassan",
     avatar: "/avatars/16.png",
     status: "offline",
+    role: "Medical Representative",
     location: {
       lat: 25.68724,
       lng: 32.63964,
@@ -264,6 +280,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Tamer Nabil",
     avatar: "/avatars/17.png",
     status: "atDoctor",
+    role: "Medical Representative",
     location: {
       lat: 30.91770,
       lng: 29.96128,
@@ -280,6 +297,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Aya Fathy",
     avatar: "/avatars/18.png",
     status: "onTheWay",
+    role: "Medical Representative",
     location: {
       lat: 31.26529,
       lng: 32.30187,
@@ -296,6 +314,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Islam Hamdy",
     avatar: "/avatars/19.png",
     status: "available",
+    role: "Medical Representative",
     location: {
       lat: 30.11395,
       lng: 31.40654,
@@ -312,6 +331,7 @@ export const liveMonitoringData: LiveMonitoring[] = [
     employeeName: "Mohamed Wael",
     avatar: "/avatars/20.png",
     status: "atHospital",
+    role: "Medical Representative",
     location: {
       lat: 30.03591,
       lng: 31.42954,
@@ -327,9 +347,10 @@ export const liveMonitoringConfig: LiveMonitoringConfig = {
   atHospital: {
     label: "At Hospital",
     icon: Hospital,
-    color: "text-blue-600",
-    span: "bg-blue-600",
-    bg: "bg-blue-100",
+    color: "text-violet-600",
+    span: "bg-violet-600",
+    bg: "bg-violet-100",
+    hex: "#7C3AED",
   },
 
   available: {
@@ -338,6 +359,7 @@ export const liveMonitoringConfig: LiveMonitoringConfig = {
     color: "text-amber-600",
     span: "bg-amber-600",
     bg: "bg-amber-100",
+    hex: "#D97706",
   },
 
   onTheWay: {
@@ -346,22 +368,25 @@ export const liveMonitoringConfig: LiveMonitoringConfig = {
     color: "text-emerald-600",
     span: "bg-emerald-600",
     bg: "bg-emerald-100",
+    hex: "#059669",
   },
 
   offline: {
     label: "Offline",
     icon: UserRoundX,
-    color: "text-violet-600",
-    span: "bg-violet-600",
-    bg: "bg-violet-100",
+    color: "text-rose-600",
+    span: "bg-rose-600",
+    bg: "bg-rose-100",
+    hex: "#FFE4E6",
   },
 
   atDoctor: {
     label: "At Doctor",
     icon: Stethoscope,
-    color: "text-sky-600",
-    span: "bg-sky-600",
-    bg: "bg-sky-100",
+    color: "text-lime-600",
+    span: "bg-lime-600",
+    bg: "bg-lime-100",
+    hex: "#65A30D",
   },
 
   onBreak: {
@@ -370,8 +395,9 @@ export const liveMonitoringConfig: LiveMonitoringConfig = {
     color: "text-orange-600",
     span: "bg-orange-600",
     bg: "bg-orange-100",
-  }
-}
+    hex: "#EA580C",
+  },
+};
 
 export const liveMonitoringStats: MonitoringStats[] = [
   {
@@ -416,6 +442,7 @@ export const liveMonitoringStatsConfig: LiveMonitoringStatsConfig = {
     icon: Users,
     color: "text-blue-600",
     bg: "bg-blue-100",
+
   },
 
   active: {
@@ -428,54 +455,34 @@ export const liveMonitoringStatsConfig: LiveMonitoringStatsConfig = {
   atHospital: {
     label: "At Hospital",
     icon: Hospital,
-    color: "text-blue-600",
-    bg: "bg-blue-100",
+    color: "text-violet-600",
+    bg: "bg-violet-100",
   },
 
   atDoctor: {
     label: "At Doctor",
     icon: Stethoscope,
-    color: "text-sky-600",
-    bg: "bg-sky-100",
+    color: "text-lime-600",
+    bg: "bg-lime-100",
   },
 
   onTheWay: {
     label: "On The Way",
     icon: CarFront,
-    color: "text-amber-600",
-    bg: "bg-amber-100",
+    color: "text-emerald-600",
+    bg: "bg-emerald-100",
   },
 
   offline: {
     label: "Offline",
     icon: UserRoundX,
-    color: "text-slate-600",
-    bg: "bg-slate-100",
+    color: "text-rose-600",
+    bg: "bg-rose-100"
   },
-};
-
-export const markerConfig = {
-  atHospital: {
-    color: "#10B981",
-  },
-
-  atDoctor: {
-    color: "#2563EB",
-  },
-
-  onTheWay: {
-    color: "#F59E0B",
-  },
-
-  available: {
-    color: "#8B5CF6",
-  },
-
-  offline: {
-    color: "#EF4444",
-  },
-
   onBreak: {
-    color: "#64748B",
+    label: "On Break",
+    icon: Coffee,
+    color: "text-orange-600",
+    bg: "bg-orange-100",
   },
 };
