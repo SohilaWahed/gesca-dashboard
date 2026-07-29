@@ -1,5 +1,5 @@
 import { Bell, Menu, MonitorCog, Moon, Sun, SunMoon } from "lucide-react";
-import { type Dispatch, type SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -28,11 +28,12 @@ export default function Navbar({ setIsOpen }: { setIsOpen: Dispatch<SetStateActi
 
   const { t } = useTranslation("common");
   const { theme, setTheme, isTheme } = useTheme()
+  const [search, setSearch]= useState('')
 
   return (
     <nav className="sticky top-0 z-50 bg-surface text-foreground h-16 flex items-center justify-between gap-4 px-4 sm:px-8 border border-border">
       <Menu className="md:hidden cursor-pointer text-muted-foreground  hover:text-primary transition-colors" size={20} onClick={() => setIsOpen((prev: boolean) => !prev)} />
-      <SearchInput text={t('search')} />
+      <SearchInput text={t('search')} state={search} setState={setSearch} />
       <div className="icons flex items-center gap-5">
         <TooltipProvider>
           <Tooltip>
