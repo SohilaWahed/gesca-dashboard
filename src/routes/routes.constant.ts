@@ -1,9 +1,9 @@
 export const ROUTES = {
     HOME: "/dashboard",
     EMPLOYEES: "/employees",
-    DOCTORS: "/doctors",
-    HOSPITALS: "/hospitals",
-    PRODUCTS: "/products",
+    EmployeeID: "/employees/:id",
+    CUSTOMERS: "customers",
+    CUSTOMERSID: "customers/:id",
     MONITORING: "/monitoring",
     REPORTS: "/reports",
     TASKS: "/tasks",
@@ -11,5 +11,5 @@ export const ROUTES = {
     LOGIN: "login",
     REGISTER: "register",
     FORGOT_PASSWORD: "forgot-password",
-    RESET_PASSWORD:"reset-password"
+    RESET_PASSWORD: "reset-password"
 }

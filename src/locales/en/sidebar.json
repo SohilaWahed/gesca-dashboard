@@ -1,10 +1,8 @@
 {
     "logo": "Viglant Pharma",
     "dashboard": "Dashboard",
-    "doctors": "Doctors",
-    "hospitals": "Hospitals",
     "employees": "Employees",
-    "products": "Products",
+    "customers": "Customers",
     "tasks": "Tasks",
     "monitoring": "Monitoring",
     "reports": "Reports",

@@ -1,9 +1,8 @@
 {
     "logo": "فيجيلانت فارما",
     "dashboard": "لوحة التحكم",
-    "doctors": "الأطباء",
-    "hospitals": "المستشفيات",
     "employees": "الموظفون",
+    "customers":"العملاء",
     "products": "المنتجات",
     "tasks": "المهام",
     "monitoring": "المراقبة",
