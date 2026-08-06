@@ -1,5 +1,5 @@
 export interface AuthContextType {
-    loggedUser: UserRole | null;
+    loggedUser: LoggedUser | null;
     isAuthenticated: boolean;
     loginContext: (res: LoginResponse) => void;
     logoutContext: () => void;
@@ -18,12 +18,12 @@ export interface LoginResponse {
 }
 
 export interface DataLogin {
-    user: UserRole
+    user: LoggedUser
     accessToken: string
     refreshToken: string
 }
 
-export interface UserRole {
+export interface LoggedUser {
     id: string
     email: string
     firstName: string

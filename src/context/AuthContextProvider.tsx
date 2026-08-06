@@ -1,14 +1,14 @@
 
 import { useState, type ReactNode } from 'react'
 import { AuthContext } from './contexts'
-import type { LoginResponse, User } from '@/types/auth.types'
+import type { LoginResponse, LoggedUser } from '@/types/auth.types'
 import { clearSession, setAccessToken, setRefreshToken } from '@/utils/tokenStorage'
 import { getUser, setUser } from '@/utils/userStorage'
 
 export default function AuthContextProvider({children}:{children:ReactNode}) {
 
 
-    const [loggedUser, setLoggedUser] = useState<User | null>(()=> {
+    const [loggedUser, setLoggedUser] = useState<LoggedUser | null>(()=> {
         return getUser()
     })
     const isAuthenticated = !!loggedUser;
