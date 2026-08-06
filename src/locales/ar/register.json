@@ -1,10 +1,15 @@
 {
     "create_account": "إنشاء حساب",
     "credientails":"أنشئ حسابك للبدء",
-    "username": "اسم المستخدم",
+   "first_name":"الأسم الأول",
+    "first_placholder":"ادخل الأسم الأول",
+    "last_name":"الأسم الأخير",
+    "last_placholder":"ادخل الأسم الأخير",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
-    "confirm_password": "تأكيد كلمة المرور",
+    "phone":"رقم الهاتف",
+    "role":"المهام",
+    "role_placholder":"اختار المهام",
     "register":"تسجيل",
     "already_have_account":"لديك حساب بالفعل؟",
     "login":"تسجيل الدخول"

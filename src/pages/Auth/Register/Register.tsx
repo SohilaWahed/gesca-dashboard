@@ -13,36 +13,80 @@ import {
   CardTitle,
   CardFooter
 } from "@/components/ui/card"
-import { Link } from "react-router-dom"
-import { Eye, Lock, Mail, Siren, User } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Link, useNavigate } from "react-router-dom"
+import { Eye, Loader2, Lock, Mail, Phone, Siren, User } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/auth.schema"
 import { useTranslation } from "react-i18next"
+import type { RegisterRequest } from "@/types/auth.types"
+import { signup } from "@/apis/auth.api"
+import { getErrorMsg } from "@/utils/getErrorMsg"
+import { useState } from "react"
+import { toast } from "sonner"
+
+type Role = {
+  label: string,
+  value: string
+}
+const roles: Role[] = [{ label: 'Admin', value: 'Admin' },
+{ label: 'Manager', value: 'Manager' },
+{ label: 'Sales Employee', value: 'SalesEmployee' }]
 
 export default function Register() {
 
+  const navigate = useNavigate()
+
   const { t } = useTranslation(["register", "common"])
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+
 
   type RegisterFormData = z.infer<typeof registerSchema>
 
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({
+  const { register, handleSubmit, control, formState: { errors } } = useForm<RegisterFormData>({
     defaultValues: {
-      username: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      phone: '',
+      role: 'SalesEmployee'
     },
     resolver: zodResolver(registerSchema)
   })
 
-  const onSubmit = (data: RegisterFormData) => {
 
-    console.log(data)
+  const onSubmit = async (data: RegisterFormData) => {
 
+    const payload: RegisterRequest = {
+      ...data,
+      phone: `+2${data.phone}`,
+    };
+
+    try {
+      setIsLoading(true)
+      await signup(payload)
+      toast.success("Account created successfully");
+      navigate('/auth/login')
+    } catch (error) {
+      const msg = getErrorMsg(error)
+      setErrorMsg(msg)
+    }finally{
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -56,26 +100,45 @@ export default function Register() {
           <LanguageBtn />
         </div>
         <CardDescription className="text-muted-foreground">
+
           <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("register:create_account")}</span>
-          {t("register:credientails")}
+          <p> {t("register:credientails")}</p>
+          {errorMsg && <p className="text-red-500 mt-2 text-sm">{errorMsg}</p>}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
-            <Field aria-invalid={!!errors.username}>
+            <Field aria-invalid={!!errors.firstName}>
               <FieldLabel htmlFor="username" className="text-foreground font-semibold ">
-                {t("register:username")}
+                {t("register:first_name")}
               </FieldLabel>
               <InputWithIcon
                 startIcon={<User size={18} />}
-                id="username"
+                id="firstName"
                 type="text"
-                placeholder="Your username"
-                {...register('username')}
+                placeholder={t("register:first_placholder")}
+                {...register('firstName')}
               />
-              {errors.username &&
-                <FieldError errors={[errors.username]} />
+              {errors.firstName &&
+                <FieldError errors={[errors.firstName]} />
+              }
+
+            </Field>
+
+            <Field aria-invalid={!!errors.lastName}>
+              <FieldLabel htmlFor="lastName" className="text-foreground font-semibold ">
+                {t("register:last_name")}
+              </FieldLabel>
+              <InputWithIcon
+                startIcon={<User size={18} />}
+                id="lastName"
+                type="text"
+                placeholder={t("register:last_placholder")}
+                {...register('lastName')}
+              />
+              {errors.lastName &&
+                <FieldError errors={[errors.lastName]} />
               }
 
             </Field>
@@ -95,43 +158,74 @@ export default function Register() {
                 <FieldError errors={[errors.email]} />
               }
             </Field>
-
+            <Field aria-invalid={!!errors.password}>
+              <FieldLabel htmlFor="password" className="text-foreground font-semibold">
+                {t("register:password")}
+              </FieldLabel>
+              <InputWithIcon
+                startIcon={<Lock size={18} />}
+                endIcon={<Eye size={18} />}
+                id="password" type="password" placeholder="••••••••"
+                {...register('password')}
+              />
+              {errors.password &&
+                <FieldError errors={[errors.password]} />
+              }
+            </Field>
             <div className="grid grid-cols-2 gap-4">
-              <Field aria-invalid={!!errors.password}>
-                <FieldLabel htmlFor="password" className="text-foreground font-semibold">
-                  {t("register:password")}
+              <Field aria-invalid={!!errors.phone}>
+                <FieldLabel htmlFor="phone" className="text-foreground font-semibold">
+                  {t("register:Phone")}
                 </FieldLabel>
                 <InputWithIcon
-                  startIcon={<Lock size={18} />}
-                  endIcon={<Eye size={18} />}
-                  id="password" type="password" placeholder="••••••••"
-                  {...register('password')}
+                  startIcon={<Phone size={18} />}
+                  id="phone" type="phone" placeholder="••••••••"
+                  {...register('phone')}
                 />
-                {errors.password &&
-                  <FieldError errors={[errors.password]} />
+                {errors.phone &&
+                  <FieldError errors={[errors.phone]} />
                 }
               </Field>
-              <Field aria-invalid={!!errors.confirmPassword}>
-                <FieldLabel htmlFor="confirmPassword" className="text-foreground font-semibold">
-                  {t("register:confirm_password")}
+              <Field>
+                <FieldLabel htmlFor="password" className="text-foreground font-semibold">
+                  {t("register:role")}
                 </FieldLabel>
-                <InputWithIcon
-                  startIcon={<Lock size={18} />}
-                  endIcon={<Eye size={18} />}
-                  id="confirmPassword" type="password" placeholder="••••••••"
-                  {...register('confirmPassword')}
+                <Controller
+                  control={control}
+                  name="role"
+                  render={({ field }) => (
+                    <Select
+                      value={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <SelectTrigger className="bg-surface text-foreground  py-5 outline-0 placeholder:text-muted-foreground text-sm rounded-md">
+                        <SelectValue placeholder={t("register:role_placeholder")} />
+                      </SelectTrigger>
+
+                      <SelectContent className="py-2 rounded-md">
+                        <SelectGroup>
+                          {roles.map((role) => (
+                            <SelectItem
+                              key={role.value}
+                              value={role.value}
+                            >
+                              {role.label}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
-                {errors.confirmPassword &&
-                  <FieldError errors={[errors.confirmPassword]} />
-                }
               </Field>
             </div>
           </FieldGroup>
-          <Field>
-            <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-                {t("register:register")}
-            </Button>
-          </Field>
+
+          <Button type="submit" disabled={isLoading} className="w-full mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+             {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
+            {t("register:register")}
+          </Button>
+
         </form>
       </CardContent>
       <CardFooter className="flex items-center justify-center">

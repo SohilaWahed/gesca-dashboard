@@ -1,4 +1,4 @@
-import changeLang from '@/services/language'
+import changeLang from '@/utils/language'
 import { Globe } from 'lucide-react'
 import { useTranslation } from 'react-i18next';
 import {

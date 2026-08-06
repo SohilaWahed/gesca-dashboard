@@ -13,9 +13,9 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
-import { Eye, Lock, Mail, Siren } from "lucide-react"
+import { Eye, Loader2, Lock, Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import * as z from 'zod'
@@ -23,10 +23,21 @@ import { loginSchema } from '../../../schemas/auth.schema';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next"
+import { login } from "@/apis/auth.api"
+import type { LoginResponse } from "@/types/auth.types"
+import { getErrorMsg } from "@/utils/getErrorMsg"
+import { useState } from "react"
+import { useAuth } from "@/hooks/useAuth"
+import { toast } from "sonner"
 
 export default function Login() {
 
-const {t} = useTranslation(["login","common"])
+  const navigate = useNavigate()
+  const { t } = useTranslation(["login", "common"])
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const { loginContext } = useAuth()
+
 
   const email = "sohilawahed@gmail.com";
 
@@ -49,8 +60,19 @@ const {t} = useTranslation(["login","common"])
     resolver: zodResolver(loginSchema)
   })
 
-  const onSubmit = (data: LoginSchemaData) => {
-    console.log(data)
+  const onSubmit = async (payload: LoginSchemaData) => {
+    try {
+      setIsLoading(true)
+      const res: LoginResponse = await login(payload)
+      loginContext(res)
+      toast.success("Login successfully");
+      navigate('/')
+    } catch (error) {
+      const msg = getErrorMsg(error)
+      setErrorMsg(msg)
+    }finally{
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -65,7 +87,8 @@ const {t} = useTranslation(["login","common"])
         </div>
         <CardDescription className="text-muted-foreground">
           <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("login:login_logo")}</span>
-          {t("login:credientails")}
+          <p> {t("login:credientails")}</p>
+          {errorMsg && <p className="text-red-500 mt-2 text-sm">{errorMsg}</p>}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -92,7 +115,7 @@ const {t} = useTranslation(["login","common"])
                 startIcon={<Lock size={18} />}
                 endIcon={<Eye size={18} />}
                 id="password"
-                type="password" 
+                type="password"
                 placeholder="••••••••"
                 {...register("password")}
               />
@@ -109,7 +132,9 @@ const {t} = useTranslation(["login","common"])
             </Field>
           </FieldGroup>
           <Field>
-            <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+            <Button type="submit" disabled={isLoading}
+             className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+               {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
               {t("login:login")}
             </Button>
           </Field>

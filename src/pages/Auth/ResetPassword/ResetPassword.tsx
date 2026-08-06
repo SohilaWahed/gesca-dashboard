@@ -13,8 +13,8 @@ import {
     CardTitle,
     CardFooter
 } from "@/components/ui/card"
-import { Link } from "react-router-dom"
-import { Eye, Lock, Siren } from "lucide-react"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
+import { Eye, Loader2, Lock, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import { useForm } from "react-hook-form"
@@ -22,10 +22,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ResetPasswordSchema } from "@/schemas/auth.schema"
 import * as z from 'zod'
 import { useTranslation } from "react-i18next"
+import { resetPassword } from "@/apis/auth.api"
+import { useState } from "react"
+import { toast } from "sonner"
+import { getErrorMsg } from "@/utils/getErrorMsg"
 
 export default function ResetPassword() {
 
-  const { t } = useTranslation(['forgotPassword', 'common'])
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get("token");
+    const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
+
+    const { t } = useTranslation(['forgotPassword', 'common'])
 
     type ResetPasswordData = z.infer<typeof ResetPasswordSchema>
 
@@ -37,8 +46,22 @@ export default function ResetPassword() {
         resolver: zodResolver(ResetPasswordSchema)
     })
 
-    const onSubmit = (data: ResetPasswordData) => {
-        console.log(data)
+    const onSubmit = async (data: ResetPasswordData) => {
+        if (!token) {
+            toast.error("Invalid reset link");
+            navigate("/auth/forgot-password");
+            return;
+        }
+        try {
+            setIsLoading(true)
+            await resetPassword(token, data.password)
+            toast.success("Password reset successfully");
+            navigate("/auth/login");
+        } catch (error) {
+            toast.error(getErrorMsg(error))
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -53,7 +76,7 @@ export default function ResetPassword() {
                 </div>
                 <CardDescription className="text-muted-foreground">
                     <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("forgotPassword:new_password_logo")}</span>
-                   {t("forgotPassword:credientails_reset")}
+                    {t("forgotPassword:credientails_reset")}
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -89,8 +112,9 @@ export default function ResetPassword() {
                         </Field>
                     </FieldGroup>
                     <Field>
-                        <Button type="submit"
+                        <Button type="submit" disabled={isLoading}
                             className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+                            {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
                             {t("forgotPassword:reset_password")}
                         </Button>
                     </Field>

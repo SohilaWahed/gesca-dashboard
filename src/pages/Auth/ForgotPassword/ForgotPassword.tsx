@@ -13,8 +13,8 @@ import {
   CardTitle,
   CardFooter
 } from "@/components/ui/card"
-import { Link } from "react-router-dom"
-import { Mail, Siren } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
+import { Loader2, Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import * as z from 'zod'
@@ -22,11 +22,18 @@ import { ForgotPasswordSchema } from "@/schemas/auth.schema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next"
+import { getErrorMsg } from "@/utils/getErrorMsg"
+import { forgetPassword } from "@/apis/auth.api"
+import { toast } from "sonner"
+import { useState } from "react"
 
 
 export default function ForgotPassword() {
 
-  const { t } = useTranslation(['forgotPassword', 'common' , 'login'])
+  const navigate = useNavigate()
+  const { t } = useTranslation(['forgotPassword', 'common', 'login'])
+    const [isLoading, setIsLoading] = useState(false)
+  
 
   type ForgotPasswordData = z.infer<typeof ForgotPasswordSchema>
   const { register, handleSubmit, formState: { errors } } = useForm<ForgotPasswordData>({
@@ -36,8 +43,19 @@ export default function ForgotPassword() {
     resolver: zodResolver(ForgotPasswordSchema)
   })
 
-  const onSubmit = (data: ForgotPasswordData) => {
-    console.log(data)
+  const onSubmit = async (data: ForgotPasswordData) => {
+
+    try {
+      setIsLoading(true)
+      await forgetPassword(data)
+      toast.success("Password reset link sent");
+      navigate(`/auth/check-email?email=${encodeURIComponent(data.email)}`)
+    } catch (error) {
+      toast.error(getErrorMsg(error));
+    }finally{
+      setIsLoading(false)
+    }
+
   }
 
   return (
@@ -52,7 +70,7 @@ export default function ForgotPassword() {
         </div>
         <CardDescription className="text-muted-foreground">
           <span className="block text-secondary-foreground text-xl lg:text-2xl mb-2 font-semibold">{t("forgotPassword:forgot_your_password")}</span>
-{t("forgotPassword:credientails")}
+          {t("forgotPassword:credientails")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -71,7 +89,8 @@ export default function ForgotPassword() {
             </Field>
           </FieldGroup>
           <Field>
-            <Button type="submit" className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+            <Button type="submit" disabled={isLoading} className="mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
+             {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
               {t("forgotPassword:send_link")}
             </Button>
           </Field>

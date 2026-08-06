@@ -1,4 +1,4 @@
-import i18n from "./i18n"
+import i18n from "../lib/i18n"
 
 export default async function changeLang(currentLang:string) {
     if (currentLang === "en") {

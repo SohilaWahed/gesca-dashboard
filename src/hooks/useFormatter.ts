@@ -1,4 +1,4 @@
-import { formatCurrency, formatDate, formatNumber, formatPercent, formatTime } from "@/services/formatNumberLang";
+import { formatCurrency, formatDate, formatNumber, formatPercent, formatTime } from "@/utils/formatNumberLang";
 import { useTranslation } from "react-i18next";
 
 export default function useFormatter() {
