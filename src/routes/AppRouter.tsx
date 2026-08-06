@@ -17,6 +17,8 @@ import Customers from '@/pages/Customers/Customers';
 import CustomerDetails from '@/pages/Customers/[id]/CustomerDetails';
 import CheckEmail from '@/pages/Auth/CheckEmail/CheckEmail';
 import ProtectedRoute from './ProtectedRoute';
+import Forbidden from '@/pages/Errors/Forbidden/Forbidden';
+import NotFound from '@/pages/Errors/NotFound/NotFound';
 
 export default function AppRouter() {
     const routes = createBrowserRouter([
@@ -52,7 +54,15 @@ export default function AppRouter() {
                 },
 
             ]
-        }
+        },
+        {
+            path: "/403",
+            element: <Forbidden />,
+        },
+        {
+            path: "*",
+            element: <NotFound />,
+        },
     ])
     return (
         <RouterProvider router={routes} />
