@@ -40,7 +40,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
     }`;
 
   const { t, i18n } = useTranslation(['sidebar', 'common'])
-  const { logoutContext, user } = useAuth()
+  const { logoutContext, loggedUser } = useAuth()
 
 
   const handleLogout = async () => {
@@ -98,10 +98,10 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
       </div>
       <div className="profile flex gap-2 items-center pt-4 border-t border-border bottom-6 inset-x-4 absolute ">
         <div className="image w-11 h-11 flex items-center justify-center rounded-full bg-primary text-white">
-          <span>{avatarName(user?.firstName, user?.lastName)}</span>
+          <span>{avatarName(loggedUser?.firstName, loggedUser?.lastName)}</span>
         </div>
         <div className="personal hidden lg:block">
-          <h2 className='text-sm font-medium text-foreground'>{user?.firstName} {user?.lastName}</h2>
+          <h2 className='text-sm font-medium text-foreground'>{loggedUser?.firstName} {loggedUser?.lastName}</h2>
           <p className='text-xs text-muted-foreground'>Role</p>
         </div>
       </div>
