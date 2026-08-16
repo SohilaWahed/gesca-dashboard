@@ -19,7 +19,8 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip"
-import SearchInput from "../common/SearchInput";
+
+import BreadCrumb from "../common/BreadCrumb";
 
 const menuItemClass = `group cursor-pointer text-muted-foreground transition-colors duration-200
    focus:bg-menu-hover focus:text-primary data-[highlighted]:bg-menu-hover data-[highlighted]:text-primary`;
@@ -28,12 +29,11 @@ export default function Navbar({ setIsOpen }: { setIsOpen: Dispatch<SetStateActi
 
   const { t } = useTranslation("common");
   const { theme, setTheme, isTheme } = useTheme()
-  const [search, setSearch]= useState('')
 
   return (
     <nav className="sticky top-0 z-50 bg-surface text-foreground h-16 flex items-center justify-between gap-4 px-4 sm:px-8 border border-border">
       <Menu size={28} className="md:hidden cursor-pointer text-muted-foreground  hover:text-primary transition-colors"  onClick={() => setIsOpen((prev: boolean) => !prev)} />
-      <SearchInput text={t('search')} search={search} onChange={setSearch} />
+     <BreadCrumb/>
       <div className="icons flex items-center gap-5">
         <TooltipProvider>
           <Tooltip>

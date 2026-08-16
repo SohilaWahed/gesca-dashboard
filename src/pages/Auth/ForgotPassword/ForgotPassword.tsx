@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next"
 import { getErrorMsg } from "@/utils/getErrorMsg"
-import { forgetPassword } from "@/apis/auth.api"
+import { forgotPassword } from "@/apis/auth.api"
 import { toast } from "sonner"
 import { useState } from "react"
 import type { ForgotPasswordPayload } from "@/types/auth.types"
@@ -46,7 +46,7 @@ export default function ForgotPassword() {
 
     try {
       setIsLoading(true)
-      await forgetPassword(data)
+      await forgotPassword(data)
       toast.success("Password reset link sent");
       navigate(`/auth/check-email?email=${encodeURIComponent(data.email)}`)
     } catch (error) {

@@ -43,7 +43,7 @@ export interface User {
     lastName: string
 }
 
-export interface forgetPasswordResponse {
+export interface forgotPasswordResponse {
     success: boolean,
     message: string
 }

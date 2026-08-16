@@ -1,4 +1,4 @@
-import { forgetPassword } from "@/apis/auth.api"
+import { forgotPassword } from "@/apis/auth.api"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import {
   Card,
@@ -17,11 +17,11 @@ import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import { toast } from "sonner"
 
 export default function CheckEmail() {
-  
+
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
 
-  const { t } = useTranslation(["forgetPassword", "common"])
+  const { t } = useTranslation(["forgotPassword", "common"])
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -32,7 +32,7 @@ export default function CheckEmail() {
   const handleSendAgain = async () => {
     try {
       setIsLoading(true);
-      const res = await forgetPassword({ email });
+      const res = await forgotPassword({ email });
       toast.success(res.message);
     } catch (error) {
       toast.error(getErrorMsg(error));
