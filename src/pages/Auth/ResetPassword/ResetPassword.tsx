@@ -20,12 +20,12 @@ import InputWithIcon from "@/components/common/InputWithIcon"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ResetPasswordSchema } from "@/schemas/auth.schema"
-import * as z from 'zod'
 import { useTranslation } from "react-i18next"
 import { resetPassword } from "@/apis/auth.api"
 import { useState } from "react"
 import { toast } from "sonner"
 import { getErrorMsg } from "@/utils/getErrorMsg"
+import type { ResetPasswordPayload } from "@/types/auth.types"
 
 export default function ResetPassword() {
 
@@ -36,9 +36,7 @@ export default function ResetPassword() {
 
     const { t } = useTranslation(['forgotPassword', 'common'])
 
-    type ResetPasswordData = z.infer<typeof ResetPasswordSchema>
-
-    const { register, handleSubmit, formState: { errors } } = useForm<ResetPasswordData>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ResetPasswordPayload>({
         defaultValues: {
             password: '',
             confirmPassword: ''
@@ -46,7 +44,7 @@ export default function ResetPassword() {
         resolver: zodResolver(ResetPasswordSchema)
     })
 
-    const onSubmit = async (data: ResetPasswordData) => {
+    const onSubmit = async (data: ResetPasswordPayload) => {
         if (!token) {
             toast.error("Invalid reset link");
             navigate("/auth/forgot-password");

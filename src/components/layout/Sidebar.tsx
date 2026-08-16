@@ -1,6 +1,6 @@
 import { BookCopy, ClipboardList, Eye, IdCard, LayoutDashboard, LogOut, Settings, Siren, Users } from 'lucide-react'
-import { NavLink} from 'react-router-dom'
-import { type ReactNode } from 'react';
+import { NavLink } from 'react-router-dom'
+import { type ReactNode, type SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Tooltip,
@@ -13,7 +13,7 @@ import { logout } from '@/apis/auth.api';
 import { getErrorMsg } from '@/utils/getErrorMsg';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
-import avatarName from '@/utils/avatarName';
+import { avatarName } from '@/utils/userName';
 
 
 type links = {
@@ -31,7 +31,11 @@ const links: links[] = [{ title: 'dashboard', label: 'Dashboard', icon: <LayoutD
 { title: 'settings', label: 'Settings', icon: <Settings size={20} /> }]
 
 
-export default function Sidebar({ isOpen }: { isOpen: boolean }) {
+interface SidebarProps {
+  isOpen: boolean,
+  setIsOpen: React.Dispatch<SetStateAction<boolean>>
+}
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 px-3 py-3 rounded-md transition-all duration-200 ${isActive
@@ -41,7 +45,6 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
 
   const { t, i18n } = useTranslation(['sidebar', 'common'])
   const { logoutContext, loggedUser } = useAuth()
-
 
   const handleLogout = async () => {
     try {
@@ -68,7 +71,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
             {links.map((link, index) => <li key={index}>
               <Tooltip>
                 <TooltipTrigger className='w-full'>
-                  <NavLink to={`/${link.title}`} className={navLinkClass} aria-label={link.label}>
+                  <NavLink to={`/${link.title}`} className={navLinkClass} aria-label={link.label} onClick={() => setIsOpen((prev) => !prev)}>
                     {link.icon}
                     <span className='hidden lg:block capitalize text-sm xl:text-base'>{t(`sidebar:${link.title}`)}</span>
                   </NavLink>
@@ -98,7 +101,7 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
       </div>
       <div className="profile flex gap-2 items-center pt-4 border-t border-border bottom-6 inset-x-4 absolute ">
         <div className="image w-11 h-11 flex items-center justify-center rounded-full bg-primary text-white">
-          <span>{avatarName(loggedUser?.firstName, loggedUser?.lastName)}</span>
+          <span>{avatarName(loggedUser!.firstName, loggedUser!.lastName)}</span>
         </div>
         <div className="personal hidden lg:block">
           <h2 className='text-sm font-medium text-foreground'>{loggedUser?.firstName} {loggedUser?.lastName}</h2>

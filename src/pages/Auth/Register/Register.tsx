@@ -26,11 +26,10 @@ import { Eye, Loader2, Lock, Mail, Phone, Siren, User } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import { Controller, useForm } from 'react-hook-form'
-import * as z from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/auth.schema"
 import { useTranslation } from "react-i18next"
-import type { RegisterRequest } from "@/types/auth.types"
+import type { RegisterPayload} from "@/types/auth.types"
 import { signup } from "@/apis/auth.api"
 import { getErrorMsg } from "@/utils/getErrorMsg"
 import { useState } from "react"
@@ -53,10 +52,7 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false)
 
 
-
-  type RegisterFormData = z.infer<typeof registerSchema>
-
-  const { register, handleSubmit, control, formState: { errors } } = useForm<RegisterFormData>({
+  const { register, handleSubmit, control, formState: { errors } } = useForm<RegisterPayload>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -68,10 +64,10 @@ export default function Register() {
     resolver: zodResolver(registerSchema)
   })
 
+console.log(errors)
+  const onSubmit = async (data: RegisterPayload) => {
 
-  const onSubmit = async (data: RegisterFormData) => {
-
-    const payload: RegisterRequest = {
+    const payload: RegisterPayload = {
       ...data,
       phone: `+2${data.phone}`,
     };

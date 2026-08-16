@@ -23,9 +23,9 @@ import NotFound from '@/pages/Errors/NotFound/NotFound';
 export default function AppRouter() {
     const routes = createBrowserRouter([
         {
-            element: <Layout />, children: [
+            element: <ProtectedRoute allowedRoles={['Admin', 'Manager']} />, children: [
                 {
-                    element: <ProtectedRoute allowedRoles={['Admin', 'Manager']} />, children: [
+                    element: <Layout />, children: [
                         { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
                         { path: ROUTES.HOME, element: <Home /> },
                         { path: ROUTES.EMPLOYEES, element: <Employees /> },
@@ -37,7 +37,7 @@ export default function AppRouter() {
                         { path: ROUTES.REPORTS, element: <Reports /> },
                         { path: ROUTES.SETTINGS, element: <Settings /> }
                     ]
-                },
+                }
             ]
         },
         {

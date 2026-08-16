@@ -17,7 +17,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { Loader2, Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
-import * as z from 'zod'
 import { ForgotPasswordSchema } from "@/schemas/auth.schema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -26,6 +25,7 @@ import { getErrorMsg } from "@/utils/getErrorMsg"
 import { forgetPassword } from "@/apis/auth.api"
 import { toast } from "sonner"
 import { useState } from "react"
+import type { ForgotPasswordPayload } from "@/types/auth.types"
 
 
 export default function ForgotPassword() {
@@ -35,15 +35,14 @@ export default function ForgotPassword() {
     const [isLoading, setIsLoading] = useState(false)
   
 
-  type ForgotPasswordData = z.infer<typeof ForgotPasswordSchema>
-  const { register, handleSubmit, formState: { errors } } = useForm<ForgotPasswordData>({
+  const { register, handleSubmit, formState: { errors } } = useForm<ForgotPasswordPayload>({
     defaultValues: {
       email: ''
     },
     resolver: zodResolver(ForgotPasswordSchema)
   })
 
-  const onSubmit = async (data: ForgotPasswordData) => {
+  const onSubmit = async (data: ForgotPasswordPayload) => {
 
     try {
       setIsLoading(true)

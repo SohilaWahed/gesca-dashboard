@@ -1,18 +1,18 @@
 
 import { axiosAuth, axiosClient } from '@/lib/axiosConfigrations'
-import type { forgetPasswordRequest, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types/auth.types'
+import type { ForgotPasswordPayload, LoginPayload, LoginResponse, RegisterPayload , RegisterResponse } from '@/types/auth.types'
 
-export const login = async (credentails: LoginRequest): Promise<LoginResponse> => {
+export const login = async (credentails: LoginPayload): Promise<LoginResponse> => {
     const res = await axiosAuth.post(`auth/login`, credentails)
     return res.data
 }
 
-export const signup = async (credentails: RegisterRequest): Promise<RegisterResponse> => {
+export const signup = async (credentails: RegisterPayload): Promise<RegisterResponse> => {
     const res = await axiosClient.post(`auth/register`, credentails)
     return res.data
 }
 
-export const forgetPassword = async (credentails:forgetPasswordRequest) => {
+export const forgetPassword = async (credentails:ForgotPasswordPayload) => {
     const res = await axiosAuth.post('auth/forgot-password', credentails)
     return res.data
 }

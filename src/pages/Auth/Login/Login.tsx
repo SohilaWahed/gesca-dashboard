@@ -18,13 +18,12 @@ import LanguageBtn from "@/components/common/LanguageBtn"
 import { Link, useNavigate } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import InputWithIcon from "@/components/common/InputWithIcon"
-import * as z from 'zod'
 import { loginSchema } from '../../../schemas/auth.schema';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next"
 import { login } from "@/apis/auth.api"
-import type { LoginResponse } from "@/types/auth.types"
+import type { LoginPayload, LoginResponse } from "@/types/auth.types"
 import { getErrorMsg } from "@/utils/getErrorMsg"
 import { useState } from "react"
 import { useAuth } from "@/hooks/useAuth"
@@ -50,9 +49,8 @@ export default function Login() {
           Email:
           Thank you.`);
 
-  type LoginSchemaData = z.infer<typeof loginSchema>
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginPayload>({
     defaultValues: {
       email: '',
       password: ''
@@ -60,7 +58,7 @@ export default function Login() {
     resolver: zodResolver(loginSchema)
   })
 
-  const onSubmit = async (payload: LoginSchemaData) => {
+  const onSubmit = async (payload: LoginPayload) => {
     try {
       setIsLoading(true)
       const res: LoginResponse = await login(payload)

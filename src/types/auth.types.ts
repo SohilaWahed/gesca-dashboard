@@ -1,14 +1,12 @@
+import type z from "zod";
+import type { ForgotPasswordSchema, loginSchema, registerSchema, ResetPasswordSchema } from "@/schemas/auth.schema";
+
+
 export interface AuthContextType {
     loggedUser: LoggedUser | null;
     isAuthenticated: boolean;
     loginContext: (res: LoginResponse) => void;
     logoutContext: () => void;
-}
-
-
-export type LoginRequest = {
-    email: string,
-    password: string
 }
 
 export interface LoginResponse {
@@ -28,17 +26,10 @@ export interface LoggedUser {
     email: string
     firstName: string
     lastName: string
-    role: Role
+    role: UserRole
 }
 
-export interface RegisterRequest {
-    email: string
-    password: string
-    firstName: string
-    lastName: string
-    role: string
-    phone: string
-}
+export type UserRole =  "Admin"| "Manager" | "SalesEmployee"
 
 export interface RegisterResponse {
     success: boolean
@@ -52,14 +43,15 @@ export interface User {
     lastName: string
 }
 
-export interface forgetPasswordRequest {
-    email: string | null
-}
-
 export interface forgetPasswordResponse {
     success: boolean,
     message: string
 }
 
-type Role = "Admin" | "Manager" | "SalesEmployee"
+export type RegisterPayload = z.infer<typeof registerSchema>
 
+export type LoginPayload = z.infer<typeof loginSchema>
+
+export  type ForgotPasswordPayload = z.infer<typeof ForgotPasswordSchema>
+
+export  type ResetPasswordPayload = z.infer<typeof ResetPasswordSchema>
