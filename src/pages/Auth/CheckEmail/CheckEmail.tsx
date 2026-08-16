@@ -13,16 +13,21 @@ import { getErrorMsg } from "@/utils/getErrorMsg"
 import { Loader2, Mail, Siren } from "lucide-react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import { toast } from "sonner"
 
 export default function CheckEmail() {
+  
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email");
 
   const { t } = useTranslation(["forgetPassword", "common"])
 
   const [isLoading, setIsLoading] = useState(false)
+
+   if (!email) {
+    return <Navigate to="/auth/forgot-password" replace />;
+  }
 
   const handleSendAgain = async () => {
     try {
