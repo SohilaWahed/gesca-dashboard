@@ -19,6 +19,7 @@ import CheckEmail from '@/pages/Auth/CheckEmail/CheckEmail';
 import ProtectedRoute from './ProtectedRoute';
 import Forbidden from '@/pages/Errors/Forbidden/Forbidden';
 import NotFound from '@/pages/Errors/NotFound/NotFound';
+import CreateEmployee from '@/pages/Employees/CreateEmployee/CreateEmployee';
 
 export default function AppRouter() {
     const routes = createBrowserRouter([
@@ -28,10 +29,26 @@ export default function AppRouter() {
                     element: <Layout />, children: [
                         { index: true, element: <Navigate to={ROUTES.HOME} replace /> },
                         { path: ROUTES.HOME, element: <Home /> },
-                        { path: ROUTES.EMPLOYEES, element: <Employees /> },
-                        { path: ROUTES.EmployeeID, element: <EmployeeDetails /> },
+                        {
+                            path: ROUTES.EMPLOYEES,
+                            children: [
+                                {
+                                    index: true,
+                                    element: <Employees />,
+                                },
+                                {
+                                    path: ROUTES.CREATE_EMPLOYEE,
+                                    element: <CreateEmployee />,
+                                },
+                                {
+                                    path: ROUTES.Employee_ID,
+                                    element: <EmployeeDetails />,
+                                },
+                            ],
+                        },
+
                         { path: ROUTES.CUSTOMERS, element: <Customers /> },
-                        { path: ROUTES.CUSTOMERSID, element: <CustomerDetails /> },
+                        { path: ROUTES.CUSTOMERS_ID, element: <CustomerDetails /> },
                         { path: ROUTES.MONITORING, element: <Monitoring /> },
                         { path: ROUTES.TASKS, element: <Tasks /> },
                         { path: ROUTES.REPORTS, element: <Reports /> },

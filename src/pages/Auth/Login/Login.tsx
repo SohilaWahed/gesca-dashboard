@@ -13,9 +13,9 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
-import { Eye, Loader2, Lock, Mail, Siren } from "lucide-react"
+import { Eye, EyeOff, Loader2, Lock, Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Checkbox } from "@/components/ui/checkbox"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import { loginSchema } from '../../../schemas/auth.schema';
@@ -34,6 +34,7 @@ export default function Login() {
   const navigate = useNavigate()
   const { t } = useTranslation(["login", "common"])
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const { loginContext } = useAuth()
 
@@ -92,6 +93,7 @@ export default function Login() {
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
+            {/* Email */}
             <Field aria-invalid={!!errors.email}>
               <FieldLabel htmlFor="email" className="text-foreground font-semibold">{t("login:email")}</FieldLabel>
               <InputWithIcon
@@ -103,21 +105,41 @@ export default function Login() {
               />
               {errors.email && <FieldError errors={[errors.email]} />}
             </Field>
-            <Field>
-              <FieldLabel htmlFor="password" className="flex items-center justify-between">
-                <span className="text-foreground font-semibold">{t("login:password")}</span>
-                <Link to={'/auth/forgot-password'} className="text-primary font-medium">{t("login:forgot_password")}</Link>
+            {/* Password */}
+            <Field aria-invalid={!!errors.password}>
+              <FieldLabel htmlFor="password" className="text-foreground font-semibold">
+                {t("register:password")}
               </FieldLabel>
-
-              <InputWithIcon
-                startIcon={<Lock size={18} />}
-                endIcon={<Eye size={18} />}
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                {...register("password")}
-              />
-              {errors.password && <FieldError errors={[errors.password]} />}
+              <div className="relative">
+                <InputWithIcon
+                  startIcon={<Lock size={18} />}
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  {...register("password")}
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword((prev) => !prev)
+                  }
+                  className="absolute inset-e-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={
+                    showPassword
+                      ? t("login:hide_password")
+                      : t("login:show_password")
+                  }
+                >
+                  {showPassword ? (
+                    <EyeOff size={17} />
+                  ) : (
+                    <Eye size={17} />
+                  )}
+                </button>
+              </div>
+              {errors.password &&
+                <FieldError errors={[errors.password]} />
+              }
             </Field>
             <Field orientation="horizontal">
               <Checkbox id="keep-login" />

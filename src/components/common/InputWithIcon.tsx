@@ -9,7 +9,7 @@ type Props = React.ComponentProps<typeof Input> & {
 
 export default function InputWithIcon({ startIcon, endIcon, ...props }: Props) {
     const parentInput = "relative bg-surface text-foreground rounded-md text-sm group"
-    const inputCss = "ps-10 py-5 outline-0 bg-transparent placeholder:text-muted-foreground text-sm rounded-md"
+    const inputCss = "ps-10 py-5 outline-0 bg-transparent placeholder:text-muted-foreground  placeholder:text-sm text-sm rounded-md"
 
     return (
         <div className={parentInput}>

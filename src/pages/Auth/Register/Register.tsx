@@ -22,14 +22,14 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Link, useNavigate } from "react-router-dom"
-import { Eye, Loader2, Lock, Mail, Phone, Siren, User } from "lucide-react"
+import { Eye, EyeOff, Loader2, Lock, Mail, Phone, Siren, User } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/auth.schema"
 import { useTranslation } from "react-i18next"
-import type { RegisterPayload} from "@/types/auth.types"
+import type { RegisterPayload } from "@/types/auth.types"
 import { signup } from "@/apis/auth.api"
 import { getErrorMsg } from "@/utils/getErrorMsg"
 import { useState } from "react"
@@ -49,6 +49,7 @@ export default function Register() {
 
   const { t } = useTranslation(["register", "common"])
   const [errorMsg, setErrorMsg] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
 
@@ -80,7 +81,7 @@ export default function Register() {
     } catch (error) {
       const msg = getErrorMsg(error)
       setErrorMsg(msg)
-    }finally{
+    } finally {
       setIsLoading(false)
     }
   }
@@ -105,6 +106,7 @@ export default function Register() {
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
+            {/* First Name */}
             <Field aria-invalid={!!errors.firstName}>
               <FieldLabel htmlFor="firstName" className="text-foreground font-semibold ">
                 {t("register:first_name")}
@@ -119,9 +121,8 @@ export default function Register() {
               {errors.firstName &&
                 <FieldError errors={[errors.firstName]} />
               }
-
             </Field>
-
+            {/* Last Name */}
             <Field aria-invalid={!!errors.lastName}>
               <FieldLabel htmlFor="lastName" className="text-foreground font-semibold ">
                 {t("register:last_name")}
@@ -136,9 +137,8 @@ export default function Register() {
               {errors.lastName &&
                 <FieldError errors={[errors.lastName]} />
               }
-
             </Field>
-
+            {/* Email */}
             <Field aria-invalid={!!errors.email}>
               <FieldLabel htmlFor="email" className="text-foreground font-semibold">
                 {t("register:email")}
@@ -154,34 +154,59 @@ export default function Register() {
                 <FieldError errors={[errors.email]} />
               }
             </Field>
+            {/* Password */}
             <Field aria-invalid={!!errors.password}>
               <FieldLabel htmlFor="password" className="text-foreground font-semibold">
                 {t("register:password")}
               </FieldLabel>
-              <InputWithIcon
-                startIcon={<Lock size={18} />}
-                endIcon={<Eye size={18} />}
-                id="password" type="password" placeholder="••••••••"
-                {...register('password')}
-              />
+              <div className="relative">
+                <InputWithIcon
+                  startIcon={<Lock size={18} />}
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  {...register("password")}
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword((prev) => !prev)
+                  }
+                  className="absolute inset-e-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={
+                    showPassword
+                      ? t("register:hide_password")
+                      : t("register:show_password")
+                  }
+                >
+                  {showPassword ? (
+                    <EyeOff size={17} />
+                  ) : (
+                    <Eye size={17} />
+                  )}
+                </button>
+              </div>
               {errors.password &&
                 <FieldError errors={[errors.password]} />
               }
             </Field>
+
             <div className="grid grid-cols-2 gap-4">
+              {/* phone */}
               <Field aria-invalid={!!errors.phone}>
                 <FieldLabel htmlFor="phone" className="text-foreground font-semibold">
                   {t("register:phone")}
                 </FieldLabel>
                 <InputWithIcon
                   startIcon={<Phone size={18} />}
-                  id="phone" type="phone" placeholder="••••••••"
+                  id="phone" type="tel" placeholder={t("register:phone_placeholder")}
                   {...register('phone')}
                 />
                 {errors.phone &&
                   <FieldError errors={[errors.phone]} />
                 }
               </Field>
+              {/* role */}
               <Field>
                 <FieldLabel htmlFor="role" className="text-foreground font-semibold">
                   {t("register:role")}
@@ -218,7 +243,7 @@ export default function Register() {
           </FieldGroup>
 
           <Button type="submit" disabled={isLoading} className="w-full mt-4 py-5 text-sm font-medium rounded-md hover:bg-hover-primary cursor-pointer">
-             {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
+            {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
             {t("register:register")}
           </Button>
 

@@ -1,12 +1,16 @@
 import {z} from 'zod'
 
 export const createEmployeeSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  firstName: z.string().min(2, 'First name is required'),
-  lastName: z.string().min(2, 'Last name is required'),
+   email: z.string().email(),
+  password: z.string().min(8),
+  firstName: z.string().min(2),
+  lastName: z.string().min(2),
   phone: z.string().optional(),
-  roleName: z.enum(['Admin', 'Manager', 'SalesEmployee']).default('SalesEmployee'),
+  roleName: z.enum([
+    "Admin",
+    "Manager",
+    "SalesEmployee",
+  ]),
 });
 
 
@@ -17,6 +21,7 @@ export const updateEmployeeSchema = z.object({
   status: z.enum(["ACTIVE", "INACTIVE", "PENDING_VERIFICATION"]).optional(),
   roleName: z.enum(['Admin', 'Manager', 'SalesEmployee']).optional(),
 });
+
 
 
 

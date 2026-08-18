@@ -1,9 +1,10 @@
 export const ROUTES = {
     HOME: "/dashboard",
     EMPLOYEES: "/employees",
-    EmployeeID: "/employees/:id",
+    Employee_ID: "/employees/:id",
+    CREATE_EMPLOYEE: "/employees/new",
     CUSTOMERS: "customers",
-    CUSTOMERSID: "customers/:id",
+    CUSTOMERS_ID: "customers/:id",
     MONITORING: "/monitoring",
     REPORTS: "/reports",
     TASKS: "/tasks",

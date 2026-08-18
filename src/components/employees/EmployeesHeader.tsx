@@ -3,6 +3,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { Button } from '../ui/button'
 import { Plus } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 export default function EmployeesHeader() {
   const {t} = useTranslation('employees')
@@ -15,7 +16,9 @@ export default function EmployeesHeader() {
         <p className='text-sm text-muted-foreground'>{t('page.description')}</p>
       </div>
       {isAdmin && <Button size="lg" className='bg-primary rounded-md text-sm text-white p-5' aria-label="Add employee">
+        <Link to={'/employees/new'} className='flex items-center gap-2'>
         <Plus size={18} /> <span>{t('page.add_employee')}</span>
+        </Link>
       </Button>}
     </header>
   )

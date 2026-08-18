@@ -3,8 +3,7 @@
     "title": "Employees",
     "description": "View and manage employees in the system.",
     "add_employee": "Add Employee",
-    "search_placeholder": "Search by name, email or phone",
-    "back_to_employees": "Back to Employees"
+    "search_placeholder": "Search by name, email or phone"
   },
   "statistics": {
     "total": "Total Employees",
@@ -71,7 +70,7 @@
     "reset_password": "Reset Password",
     "delete_employee": "Delete Employee"
   },
-   "team": {
+  "team": {
     "title": "Team",
     "id": "Team ID",
     "manager": "Team Manager",
@@ -103,5 +102,41 @@
     "cancel": "Cancel",
     "delete": "Delete Employee",
     "success": "Employee deleted successfully."
+  },
+  "create_employee": {
+    "title": "Create Employee",
+    "description": "Add a new employee to the system.",
+    "back_to_employees": "Back to Employees",
+    "personal": {
+      "title": "Personal Information",
+      "description": "Add the employee's basic information."
+    },
+    "account": {
+      "title": "Account & Access",
+      "description": "Configure login credentials and employee access."
+    },
+    "fields": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "password": "Password",
+      "role": "Role"
+    },
+    "placeholders": {
+      "first_name": "Enter first name",
+      "last_name": "Enter last name",
+      "email": "Enter email address",
+      "phone": "Enter phone number",
+      "password": "Enter a temporary password",
+      "role": "Select employee role"
+    },
+    "password_hint": "The employee can change their password after signing in.",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
+    "cancel": "Cancel",
+    "submit": "Create Employee",
+    "creating": "Creating employee...",
+    "success": "Employee created successfully."
   }
 }

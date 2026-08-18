@@ -3,6 +3,8 @@
     "credientails": "Please enter your credentials to access your workspce",
     "email": "Email Address",
     "password": "Password",
+     "show_password": "Show password",
+  "hide_password": "Hide password",
     "forgot_password": "ForgotPassword?",
     "remember_me": "Remember me for 30 days",
     "login": "Login",

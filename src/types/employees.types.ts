@@ -33,8 +33,6 @@ export interface GetEmployeesParams {
     status?: EmployeeStatus;
 }
 
-export type CreateEmployeePayload = z.infer<typeof createEmployeeSchema>;
-export type UpdateEmployeePayload = z.infer<typeof updateEmployeeSchema>;
 
 export interface EmployeesResponse {
 
@@ -144,3 +142,6 @@ export interface EmployeesStatistic {
     inactiveEmployees: number,
     joinThisMonth: number,
 }
+
+export type CreateEmployeePayload = z.infer<typeof createEmployeeSchema>;
+export type UpdateEmployeePayload = z.infer<typeof updateEmployeeSchema>;

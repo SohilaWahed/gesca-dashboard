@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form"
 import { getErrorMsg } from "@/utils/getErrorMsg"
 import { useTranslation } from "react-i18next"
 import InputWithIcon from "@/components/common/InputWithIcon"
-import { Eye, Loader2, Lock } from "lucide-react"
+import { Eye, EyeOff, Loader2, Lock } from "lucide-react"
 import { resetEmpPasswordApi } from "@/apis/employees.api"
 import type { ResetPasswordPayload } from "@/types/auth.types"
 import { useEffect, useState } from "react"
@@ -35,6 +35,8 @@ export default function ResetPasswordDialog({ isReset, setIsReset, employee }: R
 
   const { t } = useTranslation("employees")
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
@@ -84,32 +86,75 @@ export default function ResetPasswordDialog({ isReset, setIsReset, employee }: R
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="newPassword" className="text-foreground font-semibold">
-                {t("reset_password.new_password")}
+            {/* Password */}
+            <Field aria-invalid={!!errors.password}>
+              <FieldLabel htmlFor="password" className="text-foreground font-semibold">
+                {t("register:password")}
               </FieldLabel>
-              <InputWithIcon
-                startIcon={<Lock size={18} />}
-                endIcon={<Eye size={18} />}
-                id="newPassword"
-                type="password"
-                placeholder="••••••••"
-                {...register('password')}
-              />
-              {errors.password && <FieldError errors={[errors.password]} />}
+              <div className="relative">
+                <InputWithIcon
+                  startIcon={<Lock size={18} />}
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  {...register("password")}
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword((prev) => !prev)
+                  }
+                  className="absolute inset-e-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={
+                    showPassword
+                      ? t("create_employee.hide_password")
+                      : t("create_employee.show_password")
+                  }
+                >
+                  {showPassword ? (
+                    <EyeOff size={17} />
+                  ) : (
+                    <Eye size={17} />
+                  )}
+                </button>
+              </div>
+              {errors.password &&
+                <FieldError errors={[errors.password]} />
+              }
             </Field>
+            {/* Confirm Password */}
             <Field>
               <FieldLabel htmlFor="confirmPassword" className="text-foreground font-semibold">
                 {t("reset_password.confirm_password")}
               </FieldLabel>
-              <InputWithIcon
-                startIcon={<Lock size={18} />}
-                endIcon={<Eye size={18} />}
-                id="confirmPassword"
-                type="password"
-                placeholder="••••••••"
-                {...register('confirmPassword')}
-              />
+              <div className="relative">
+                <InputWithIcon
+                  startIcon={<Lock size={18} />}
+                  id="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  {...register('confirmPassword')}
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowPassword((prev) => !prev)
+                  }
+                  className="absolute inset-e-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label={
+                    showPassword
+                      ? t("create_employee.hide_password")
+                      : t("create_employee.show_password")
+                  }
+                >
+                  {showPassword ? (
+                    <EyeOff size={17} />
+                  ) : (
+                    <Eye size={17} />
+                  )}
+                </button>
+              </div>
+             
               {errors.confirmPassword && <FieldError errors={[errors.confirmPassword]} />}
             </Field>
           </FieldGroup>
