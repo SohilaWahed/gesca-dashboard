@@ -1,5 +1,5 @@
 import { Bell, Menu, MonitorCog, Moon, Sun, SunMoon } from "lucide-react";
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 
 import {

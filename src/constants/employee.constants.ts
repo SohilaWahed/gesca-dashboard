@@ -16,22 +16,19 @@ export const statusColors = {
 } as const;
 
 
-import type {EmployeeFilters, EmployeeRole, EmployeeSort, EmployeeStatus } from "@/types/employees.types";
+import type { EmployeeFilters, EmployeeRole, EmployeeSort, EmployeeStatus } from "@/types/employees.types";
 
-export const roleOptions: {
-    label: string;
-    value: EmployeeRole;
-}[] = [
+export const roleOptions: { label: string; value: EmployeeRole; }[] = [
         {
-            label: "All Roles",
+            label: "all",
             value: "",
         },
         {
-            label: "Manager",
+            label: "manager",
             value: "Manager",
         },
         {
-            label: "Sales Employee",
+            label: "sales_employee",
             value: "SalesEmployee",
         },
     ];
@@ -41,19 +38,19 @@ export const statusOptions: {
     value: EmployeeStatus;
 }[] = [
         {
-            label: "All Status",
+            label: "all",
             value: "",
         },
         {
-            label: "Active",
+            label: "active",
             value: "ACTIVE",
         },
         {
-            label: "Inactive",
+            label: "inactive",
             value: "INACTIVE",
         },
         {
-            label: "Pending Verification",
+            label: "pending_verification",
             value: "PENDING_VERIFICATION",
         },
     ];
@@ -63,19 +60,19 @@ export const sortOptions: {
     value: EmployeeSort;
 }[] = [
         {
-            label: "Newest",
+            label: "newest",
             value: "newest",
         },
         {
-            label: "Oldest",
+            label: "oldest",
             value: "oldest",
         },
         {
-            label: "Name A-Z",
+            label: "name_asc",
             value: "az",
         },
         {
-            label: "Name Z-A",
+            label: "name_desc",
             value: "za",
         },
     ];

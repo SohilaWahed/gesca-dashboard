@@ -1,3 +1,107 @@
 {
-    "title": "Employees"
+  "page": {
+    "title": "Employees",
+    "description": "View and manage employees in the system.",
+    "add_employee": "Add Employee",
+    "search_placeholder": "Search by name, email or phone",
+    "back_to_employees": "Back to Employees"
+  },
+  "statistics": {
+    "total": "Total Employees",
+    "active": "Active Employees",
+    "inactive": "Inactive Employees",
+    "join_this_month": "Join This Month",
+    "reports": "Reports Uploaded",
+    "visits": "Visits Completed",
+    "tasks": "Tasks Completed"
+  },
+  "filters": {
+    "role": "Role",
+    "status": "Status",
+    "sort_by": "Sort By",
+    "select_role": "Select Role",
+    "select_status": "Select Status",
+    "select_sort": "Select Sort",
+    "all": "All",
+    "global": "Filters",
+    "global_description": "Refine the employee list",
+    "reset": "Reset",
+    "apply": "Apply"
+  },
+  "roles": {
+    "all": "All Roles",
+    "manager": "Manager",
+    "sales_employee": "Sales Employee"
+  },
+  "statuses": {
+    "all": "All Statuses",
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending_verification": "Pending Verification"
+  },
+  "sort": {
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "name_asc": "Name A-Z",
+    "name_desc": "Name Z-A"
+  },
+  "table": {
+    "employee": "Employee",
+    "email": "Email",
+    "phone": "Phone",
+    "role": "Role",
+    "status": "Status",
+    "joined": "Joined",
+    "actions": "Actions",
+    "view_account": "View Account",
+    "edit_employee": "Edit Employee",
+    "reset_password": "Reset Password",
+    "delete": "Delete"
+  },
+  "details": {
+    "title": "Employee Details",
+    "description": "View and manage employee information.",
+    "joined": "Joined",
+    "role": "Role",
+    "team": "Team",
+    "no_team": "No team assigned",
+    "back_to_employees": "Back to Employees",
+    "actions": "Actions",
+    "edit_employee": "Edit Employee",
+    "reset_password": "Reset Password",
+    "delete_employee": "Delete Employee"
+  },
+   "team": {
+    "title": "Team",
+    "id": "Team ID",
+    "manager": "Team Manager",
+    "created": "Team Created",
+    "joined": "Joined Team",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "edit_employee": {
+    "title": "Edit Employee",
+    "description": "Update employee information.",
+    "cancel": "Cancel",
+    "save_changes": "Save Changes",
+    "success": "Employee updated successfully."
+  },
+  "reset_password": {
+    "title": "Reset Password",
+    "description": "Reset password for {{name}}",
+    "new_password": "New Password",
+    "confirm_password": "Confirm New Password",
+    "cancel": "Cancel",
+    "reset": "Reset Password",
+    "success": "Employee password reset successfully."
+  },
+  "delete_employee": {
+    "title": "Delete Employee",
+    "description": "Are you sure you want to delete {{name}}?",
+    "warning": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete Employee",
+    "success": "Employee deleted successfully."
+  }
 }

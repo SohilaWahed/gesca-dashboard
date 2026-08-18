@@ -16,41 +16,47 @@ import {
   Clock,
 } from "lucide-react";
 import StatisticCard from "@/components/common/StatisticCard";
+import EditEmployeeDialog from "@/components/employees/actions/EditEmployeeDialog";
+import ResetPasswordDialog from "@/components/employees/actions/ResetPasswordDialog";
+import DeleteEmployeeDialog from "@/components/employees/actions/DeleteEmployeeDialog";
 
-const employeesStatistics = [
-  {
-    label: "Total Employees",
-    value: mockEmployeesStatistics.data.totalEmployees,
-    icon: Users,
-    bg: "bg-violet-100",
-    text: "text-violet-600",
-  },
-  {
-    label: "Active Employees",
-    value: mockEmployeesStatistics.data.activeEmployees,
-    icon: UserCheck,
-    bg: "bg-green-100",
-    text: "text-green-600",
-  },
-  {
-    label: "Inactive Employees",
-    value: mockEmployeesStatistics.data.inactiveEmployees,
-    icon: UserX,
-    bg: "bg-slate-100",
-    text: "text-slate-600",
-  },
-  {
-    label: "Join This Month",
-    value: mockEmployeesStatistics.data.joinThisMonth,
-    icon: Clock,
-    bg: "bg-orange-100",
-    text: "text-orange-600",
-  },
-];
+
 
 export default function Employees() {
 
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation("employees")
+
+  const employeesStatistics = [
+    {
+      label: t("statistics.total"),
+      value: mockEmployeesStatistics.data.totalEmployees,
+      icon: Users,
+      bg: "bg-violet-100",
+      text: "text-violet-600",
+    },
+    {
+      label: t("statistics.active"),
+      value: mockEmployeesStatistics.data.activeEmployees,
+      icon: UserCheck,
+      bg: "bg-green-100",
+      text: "text-green-600",
+    },
+    {
+      label: t("statistics.inactive"),
+      value: mockEmployeesStatistics.data.inactiveEmployees,
+      icon: UserX,
+      bg: "bg-slate-100",
+      text: "text-slate-600",
+    },
+    {
+      label: t("statistics.join_this_month"),
+      value: mockEmployeesStatistics.data.joinThisMonth,
+      icon: Clock,
+      bg: "bg-orange-100",
+      text: "text-orange-600",
+    },
+  ]
+
   const [filters, setFilters] = useState(initialEmployeeFilters)
   const [employees, setEmployees] = useState<Employee[]>(mockEmployees.data)
   const [currentPage, setCurrentPage] = useState<number>(0)
@@ -58,12 +64,12 @@ export default function Employees() {
   const [cursorHistory, setCursorHistory] = useState<(string | null)[]>([null])
   const [hasNextPage, setHasNextPage] = useState<boolean>(false)
 
-
   const onNext = () => {
     if (hasNextPage) {
       setCurrentPage(prev => prev + 1)
     }
   }
+
   const onPrevious = () => {
     if (currentPage > 0) {
       setCurrentPage(prev => prev - 1)
@@ -74,6 +80,25 @@ export default function Employees() {
     setFilters({ ...newFilters })
     setCursorHistory([null])
     setCurrentPage(0)
+  }
+
+  const [isEdit, setIsEdit] = useState(false)
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null)
+  const onEdit = (employee: Employee) => {
+    setIsEdit(true)
+    setSelectedEmployee(employee)
+  }
+
+  const [isReset, setIsReset] = useState(false)
+  const onReset = (employee: Employee) => {
+    setIsReset(true)
+    setSelectedEmployee(employee)
+  }
+
+  const [isDelete, setIsDelete] = useState(false)
+  const onDelete = (employee: Employee) => {
+    setIsDelete(true)
+    setSelectedEmployee(employee)
   }
 
   useEffect(() => {
@@ -109,8 +134,11 @@ export default function Employees() {
       <EmployeesHeader />
       <StatisticCard statistics={employeesStatistics} columns={4} />
       <EmployeesFilters filters={filters} onFiltersChange={onFiltersChange} />
-      <GenericTable columns={getEmployeeColumns(i18n.language)} data={employees}
+      <GenericTable columns={getEmployeeColumns({ t, language: i18n.language, onEdit, onReset, onDelete })} data={employees}
         hasNextPage={hasNextPage} currentPage={currentPage} onNext={onNext} onPrevious={onPrevious} limit={limit} setLimit={setLimit} />
+      <EditEmployeeDialog isEdit={isEdit} setIsEdit={setIsEdit} employee={selectedEmployee} />
+      <ResetPasswordDialog isReset={isReset} setIsReset={setIsReset} employee={selectedEmployee} />
+      <DeleteEmployeeDialog isDelete={isDelete} setIsDelete={setIsDelete} employee={selectedEmployee} />
     </div>
   )
 }

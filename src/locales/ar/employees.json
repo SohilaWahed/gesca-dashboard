@@ -1,0 +1,106 @@
+{
+  "page": {
+    "title": "الموظفون",
+    "description": "عرض وإدارة الموظفين في النظام.",
+    "add_employee": "إضافة موظف",
+    "search_placeholder": "البحث بالاسم أو البريد الإلكتروني أو رقم الهاتف",
+    "back_to_employees": "العودة إلى الموظفين"
+  },
+  "statistics": {
+    "total": "إجمالي الموظفين",
+    "active": "الموظفون النشطون",
+    "inactive": "الموظفون غير النشطين",
+    "join_this_month": "المنضمون هذا الشهر",
+    "reports": "التقارير المرفوعة",
+    "visits": "الزيارات المكتملة",
+    "tasks": "المهام المكتملة"
+  },
+  "filters": {
+    "role": "الدور",
+    "status": "الحالة",
+    "sort_by": "ترتيب حسب",
+    "select_role": "اختر الدور",
+    "select_status": "اختر الحالة",
+    "select_sort": "اختر الترتيب",
+    "all": "الكل",
+    "global": "الفلاتر",
+    "global_description": "تخصيص قائمة الموظفين",
+    "reset": "إعادة تعيين",
+    "apply": "تطبيق"
+  },
+  "roles": {
+    "manager": "مدير",
+    "sales_employee": "موظف مبيعات"
+  },
+  "statuses": {
+    "all": "كل الحالات",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "pending_verification": "في انتظار التحقق"
+  },
+  "sort": {
+    "newest": "الأحدث",
+    "oldest": "الأقدم",
+    "name_asc": "الاسم تصاعديًا",
+    "name_desc": "الاسم تنازليًا"
+  },
+  "table": {
+    "employee": "الموظف",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "role": "الدور",
+    "status": "الحالة",
+    "joined": "تاريخ الانضمام",
+    "actions": "الإجراءات",
+    "view_account": "عرض الحساب",
+    "edit_employee": "تعديل الموظف",
+    "reset_password": "إعادة تعيين كلمة المرور",
+    "delete": "حذف"
+  },
+  "details": {
+    "title": "تفاصيل الموظف",
+    "description": "عرض وإدارة معلومات الموظف.",
+    "joined": "تاريخ الانضمام",
+    "role": "الدور",
+    "team": "الفريق",
+    "no_team": "لم يتم تعيين فريق",
+    "back_to_employees": "العودة إلى الموظفين",
+    "actions": "الإجراءات",
+    "edit_employee": "تعديل الموظف",
+    "reset_password": "إعادة تعيين كلمة المرور",
+    "delete_employee": "حذف الموظف"
+  },
+  "team": {
+    "title": "الفريق",
+    "id": "معرّف الفريق",
+    "manager": "مدير الفريق",
+    "created": "تاريخ إنشاء الفريق",
+    "joined": "تاريخ الانضمام إلى الفريق",
+    "active": "نشط",
+    "inactive": "غير نشط"
+  },
+  "edit_employee": {
+    "title": "تعديل الموظف",
+    "description": "تحديث بيانات الموظف.",
+    "cancel": "إلغاء",
+    "save_changes": "حفظ التغييرات",
+    "success": "تم تحديث بيانات الموظف بنجاح."
+  },
+  "reset_password": {
+    "title": "إعادة تعيين كلمة المرور",
+    "description": "إعادة تعيين كلمة المرور للموظف {{name}}",
+    "new_password": "كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور الجديدة",
+    "cancel": "إلغاء",
+    "reset": "إعادة تعيين كلمة المرور",
+    "success": "تم إعادة تعيين كلمة مرور الموظف بنجاح."
+  },
+  "delete_employee": {
+    "title": "حذف الموظف",
+    "description": "هل أنت متأكد أنك تريد حذف {{name}}؟",
+    "warning": "لا يمكن التراجع عن هذا الإجراء.",
+    "cancel": "إلغاء",
+    "delete": "حذف الموظف",
+    "success": "تم حذف الموظف بنجاح."
+  }
+}

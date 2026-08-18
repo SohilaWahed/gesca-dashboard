@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function EmployeeCard({ employee }: { employee: EmployeeDetails }) {
 
-    const { i18n } = useTranslation()
+    const { t, i18n } = useTranslation("employees")
     const avatar = avatarName(employee.firstName, employee.lastName)
     const name = getEmployeeFullName(employee.firstName, employee.lastName)
     const joined = formatDate(employee.createdAt, i18n.language)
@@ -34,14 +34,14 @@ export default function EmployeeCard({ employee }: { employee: EmployeeDetails }
                 <div className='flex items-center gap-2 border-e border-border'>
                     <CalendarDays size={18} />
                     <div className='flex flex-col'>
-                        <span className='text-muted-foreground font-semibold'>Joined</span>
+                        <span className='text-muted-foreground font-semibold'> {t("details.joined")}</span>
                         <span className='text-sm'>{joined}</span>
                     </div>
                 </div>
                 <div className='flex items-center gap-2'>
                     <UserShield size={18} />
                     <div className='flex flex-col'>
-                        <span className='text-muted-foreground font-semibold'>Role</span>
+                        <span className='text-muted-foreground font-semibold'> {t("details.role")}</span>
                         <span className='text-sm'>{employee.role?.name ?? "_"}</span>
                     </div>
                 </div>

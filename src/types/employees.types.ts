@@ -137,6 +137,7 @@ export interface EmployeesStatisticsResponse {
     message: string,
     data: EmployeesStatistic
 }
+
 export interface EmployeesStatistic {
     totalEmployees: number,
     activeEmployees: number,

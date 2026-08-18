@@ -1,11 +1,11 @@
 {
-    "select theme": "Select Theme",
+    "select_theme": "Select Theme",
     "dir": "ltr",
     "dark": "Dark",
     "light": "Light",
     "system": "Sytem Mode",
     "save": "Save",
-    "save changes": "Save Changes",
+    "save_changes": "Save Changes",
     "delete": "Delete",
     "update": "Update",
     "see all": "See All",
@@ -13,5 +13,7 @@
     "notifications": "Notifications",
     "lang": "Languages",
     "theme": "Theme",
-    "logo": "GESCA"
+    "logo": "GESCA",
+    "next":"Next",
+    "previous":"Previous"
 }

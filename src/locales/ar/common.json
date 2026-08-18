@@ -1,17 +1,19 @@
 {
-    "select theme":"اختار السمة",
+    "select_theme":"اختار السمة",
     "dir":"rtl",
     "dark":"ليلى",
     "light":"نهارى",
     "system":"نظام الجهاز",
     "save": "حفظ",
-    "save changes": "حفظ التغييرات",
+    "save_changes": "حفظ التغييرات",
     "delete": "حذف",
     "update": "تعديل",
     "see all": "عرض الكل",
     "search":"ابحث هنا....",
     "notifications":"الاشعارات",
    "lang":"اللغة",
-   "theme":"السمة"
+   "theme":"السمة",
+   "next":"التالى",
+    "previous":"السابق"
    
 }

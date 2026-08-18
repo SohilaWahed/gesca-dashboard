@@ -14,6 +14,10 @@ import enDashboard from '../locales/en/dashboard.json'
 import arDashboard from '../locales/ar/dashboard.json'
 import enMonitoring from '../locales/en/monitoring.json'
 import arMonitoring from '../locales/ar/monitoring.json'
+import enEmployees from '../locales/en/employees.json'
+import arEmployees from '../locales/ar/employees.json'
+
+const savedLanguage = localStorage.getItem('lang') || 'en'
 
 i18n.use(initReactI18next).init({
     resources:{
@@ -24,7 +28,8 @@ i18n.use(initReactI18next).init({
             register:enRegister,
             forgotPassword:enForgotPassword,
             dashboard:enDashboard,
-            monitoring:enMonitoring
+            monitoring:enMonitoring,
+            employees:enEmployees
         },
         ar:{
             sidebar:arSidebar,
@@ -33,16 +38,29 @@ i18n.use(initReactI18next).init({
             register:arRegister,
             forgotPassword:arForgotPassword,
             dashboard:arDashboard,
-            monitoring:arMonitoring
+            monitoring:arMonitoring,
+            employees:arEmployees
         }
     },
-    lng:localStorage.getItem('lang') || 'en',
+    lng: savedLanguage,
     fallbackLng: 'en',
     interpolation:{
         escapeValue:false
     }
 })
 
+const updateDirection = (language:string)=>{
+     const direction = language.startsWith("ar") ? "rtl" : "ltr";
+      document.documentElement.lang = language;
+    document.documentElement.dir = direction;
+}
 
+updateDirection(savedLanguage)
+
+
+i18n.on("languageChanged" , (language)=>{
+    localStorage.setItem("lang", language);
+    updateDirection(language);
+})
 
 export default i18n

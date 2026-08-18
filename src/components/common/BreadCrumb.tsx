@@ -17,7 +17,7 @@ export default function BreadCrumb() {
     const segments = pathname.split('/').filter(Boolean)
 
     return (
-        <Breadcrumb className="flex-1 min-w-0">
+        <Breadcrumb className="flex-1 min-w-0 hidden md:block">
             <BreadcrumbList>
                 {segments.map((segment, index) => {
                     const isLast = index === segment.length - 1

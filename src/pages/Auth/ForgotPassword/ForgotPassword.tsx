@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Loader2, Mail, Siren } from "lucide-react"
 import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
-import { ForgotPasswordSchema } from "@/schemas/auth.schema"
+import { forgotPasswordSchema } from "@/schemas/auth.schema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next"
@@ -39,7 +39,7 @@ export default function ForgotPassword() {
     defaultValues: {
       email: ''
     },
-    resolver: zodResolver(ForgotPasswordSchema)
+    resolver: zodResolver(forgotPasswordSchema)
   })
 
   const onSubmit = async (data: ForgotPasswordPayload) => {

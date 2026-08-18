@@ -27,11 +27,11 @@ export const loginSchema = z.object({
     password: z.string().min(8, 'Wrong password')
 })
 
-export const ForgotPasswordSchema = z.object({
+export const forgotPasswordSchema = z.object({
     email: z.email("Invalid email Address"),
 })
 
-export const ResetPasswordSchema = z.object({
+export const resetPasswordSchema = z.object({
     password: z
         .string()
         .regex(regex, "Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character."),

@@ -8,6 +8,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
+import { useTranslation } from 'react-i18next'
+import { formatNumber } from '@/utils/formatNumberLang'
 
 interface FootTableProps {
     hasNextPage: boolean
@@ -26,6 +28,8 @@ export default function FootTable({
     limit,
     setLimit,
 }: FootTableProps) {
+
+    const {t , i18n} = useTranslation('common')
 
     return (
         <div className="flex items-center justify-between gap-4 border-t border-border px-4 py-3">
@@ -49,7 +53,7 @@ export default function FootTable({
                                     key={value}
                                     value={String(value)}
                                 >
-                                    {value}
+                                    {formatNumber(value , i18n.language)}
                                 </SelectItem>
                             )
                         })}
@@ -66,11 +70,11 @@ export default function FootTable({
                     onClick={onPrevious}
                     className='rounded-md px-4 py-1 cursor-pointer'
                 >
-                    Previous
+                    {t('previous')}
                 </Button>
 
                 <span className="min-w-8 text-center text-sm font-medium">
-                    {currentPage + 1}
+                    {formatNumber(currentPage + 1 , i18n.language)}
                 </span>
 
                 <Button
@@ -80,7 +84,7 @@ export default function FootTable({
                     onClick={onNext}
                     className='rounded-md px-4 py-1 cursor-pointer'
                 >
-                    Next
+                     {t('next')}
                 </Button>
 
             </div>

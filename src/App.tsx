@@ -12,7 +12,7 @@ function App() {
         <AuthContextProvider>
           <Toaster
             richColors
-            position="top-right"
+            position={document.documentElement.dir === 'rtl' ? "top-left" : "top-right"}
             duration={3000}
           />
           <AppRouter />

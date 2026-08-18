@@ -64,7 +64,7 @@ export default function Register() {
     resolver: zodResolver(registerSchema)
   })
 
-console.log(errors)
+
   const onSubmit = async (data: RegisterPayload) => {
 
     const payload: RegisterPayload = {
@@ -106,7 +106,7 @@ console.log(errors)
         <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
             <Field aria-invalid={!!errors.firstName}>
-              <FieldLabel htmlFor="username" className="text-foreground font-semibold ">
+              <FieldLabel htmlFor="firstName" className="text-foreground font-semibold ">
                 {t("register:first_name")}
               </FieldLabel>
               <InputWithIcon
@@ -171,7 +171,7 @@ console.log(errors)
             <div className="grid grid-cols-2 gap-4">
               <Field aria-invalid={!!errors.phone}>
                 <FieldLabel htmlFor="phone" className="text-foreground font-semibold">
-                  {t("register:Phone")}
+                  {t("register:phone")}
                 </FieldLabel>
                 <InputWithIcon
                   startIcon={<Phone size={18} />}
@@ -183,7 +183,7 @@ console.log(errors)
                 }
               </Field>
               <Field>
-                <FieldLabel htmlFor="password" className="text-foreground font-semibold">
+                <FieldLabel htmlFor="role" className="text-foreground font-semibold">
                   {t("register:role")}
                 </FieldLabel>
                 <Controller

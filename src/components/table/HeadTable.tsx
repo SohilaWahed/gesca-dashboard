@@ -14,7 +14,7 @@ export default function HeadTable<T>({ columns }: { columns: TableColumn<T>[] })
                 {columns.map((column) => (
                     <TableHead
                         key={column.id}
-                        className="h-12 whitespace-nowrap px-4 text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+                        className="h-12 whitespace-nowrap px-4 text-xs font-semibold uppercase tracking-wide text-muted-foreground text-start"
                     >
                         {column.label}
                     </TableHead>

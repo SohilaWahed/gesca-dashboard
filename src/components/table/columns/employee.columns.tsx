@@ -5,14 +5,22 @@ import type { Employee } from "@/types/employees.types"
 import type { TableColumn } from "@/types/table.type"
 import { formatDate } from "@/utils/formatNumberLang"
 import { avatarName, getEmployeeFullName } from "@/utils/userName"
+import EmployeeActions from "@/components/employees/EmployeeAction"
+import type { TFunction } from "i18next"
 
-import EmployeeAction from "@/components/employees/EmployeeAction"
+interface getEmployeeColumnsParams {
+    t: TFunction
+    language: string,
+    onEdit: (employee: Employee) => void,
+    onReset: (employee: Employee) => void,
+    onDelete: (employee: Employee) => void
+}
 
-export const getEmployeeColumns = (language: string): TableColumn<Employee>[] =>
+export const getEmployeeColumns = ({ t, language, onEdit, onReset, onDelete }: getEmployeeColumnsParams): TableColumn<Employee>[] =>
     [
         {
             id: 'employee',
-            label: 'Employee',
+            label: t("table.employee"),
             render: (emp) => {
                 const avatar = avatarName(emp.firstName, emp.lastName)
                 const name = getEmployeeFullName(
@@ -38,18 +46,18 @@ export const getEmployeeColumns = (language: string): TableColumn<Employee>[] =>
         },
         {
             id: 'email',
-            label: 'Email',
+            label: t("table.email"),
             render: (employee) => employee.email,
         },
 
         {
             id: 'phone',
-            label: 'Phone',
+            label: t("table.phone"),
             render: (employee) => employee.phone,
         },
         {
             id: 'role',
-            label: 'Role',
+            label: t("table.role"),
             render: (employee) => <>
                 <span className={cn('rounded-md px-2.5 py-1 text-xs font-medium', roleColors[employee.role.name])}>
                     {employee.role.name}
@@ -59,7 +67,7 @@ export const getEmployeeColumns = (language: string): TableColumn<Employee>[] =>
 
         {
             id: 'status',
-            label: 'Status',
+            label: t("table.status"),
             render: (employee) => <>
                 <div className={cn('rounded-md px-2.5 py-1  inline-flex gap-2 items-center text-xs font-medium', statusColors[employee.status])}>
                     <span className={cn('size-1.5 rounded-full bg-current')}></span>
@@ -69,14 +77,14 @@ export const getEmployeeColumns = (language: string): TableColumn<Employee>[] =>
         },
 
         {
-            id: 'createdAt',
-            label: 'Joined',
+            id: 'joined',
+            label: t("table.joined"),
             render: (employee) => formatDate(employee.createdAt, language),
         },
         {
             id: 'actions',
-            label: 'Actions',
-            render: (employee)=> <EmployeeAction employee={employee}/>
+            label: t("table.actions"),
+            render: (employee) => <EmployeeActions employee={employee} onEdit={onEdit} onReset={onReset} onDelete={onDelete} />
 
         }
     ]

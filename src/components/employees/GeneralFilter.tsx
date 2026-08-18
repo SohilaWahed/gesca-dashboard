@@ -12,6 +12,7 @@ import type { EmployeeFilters, EmployeeRole, EmployeeSort, EmployeeStatus } from
 import { useState } from "react";
 import CheckboxItem from "../common/CheckboxItem";
 import FilterGroup from "../common/FilterGroup";
+import { useTranslation } from "react-i18next";
 
 interface GlobalFilterProps {
     filters: EmployeeFilters;
@@ -24,6 +25,8 @@ export default function GlobalFilter({
     onApply,
     onReset,
 }: GlobalFilterProps) {
+
+    const { t } = useTranslation("employees")
 
     const [localFilters, setLocalFilters] = useState<EmployeeFilters>(filters);
 
@@ -47,7 +50,7 @@ export default function GlobalFilter({
                     className="gap-2 rounded-md"
                 >
                     <SlidersHorizontal className="size-4" />
-                    Filters
+                    {t("filters.global")}
                 </Button>
 
             </PopoverTrigger>
@@ -63,19 +66,19 @@ export default function GlobalFilter({
                     {/* Header */}
 
                     <div>
-                        <h3 className="font-semibold text-sm">
-                            Filters
-                        </h3>
+                       <h3 className="font-semibold text-sm">
+    {t("filters.global")}
+</h3>
 
-                        <p className="text-xs text-muted-foreground">
-                            Refine the employee list
-                        </p>
+<p className="text-xs text-muted-foreground">
+    {t("filters.global_description")}
+</p>
                     </div>
 
 
                     {/* ROLE */}
 
-                    <FilterGroup title="Role">
+                    <FilterGroup title={t("filters.role")}>
 
                         {roleOptions
                             .filter((role) => role.value !== "")
@@ -83,7 +86,7 @@ export default function GlobalFilter({
 
                                 <CheckboxItem
                                     key={role.value}
-                                    label={role.label}
+                                    label={t(`roles.${role.label}`)}
                                     checked={
                                         localFilters.role === role.value
                                     }
@@ -107,7 +110,7 @@ export default function GlobalFilter({
 
                     {/* STATUS */}
 
-                    <FilterGroup title="Status">
+                    <FilterGroup title={t("filters.status")}>
 
                         {statusOptions
                             .filter((status) => status.value !== "")
@@ -115,7 +118,7 @@ export default function GlobalFilter({
 
                                 <CheckboxItem
                                     key={status.value}
-                                    label={status.label}
+                                    label={t(`statuses.${status.label}`)}
                                     checked={
                                         localFilters.status === status.value
                                     }
@@ -139,13 +142,13 @@ export default function GlobalFilter({
 
                     {/* SORT */}
 
-                    <FilterGroup title="Sort By">
+                    <FilterGroup title={t("filters.sort_by")}>
 
                         {sortOptions.map((sort) => (
 
                             <CheckboxItem
                                 key={sort.value}
-                                label={sort.label}
+                                label={t(`sort.${sort.label}`)}
                                 checked={
                                     localFilters.sort === sort.value
                                 }
@@ -175,11 +178,11 @@ export default function GlobalFilter({
                             variant="ghost"
                             onClick={handleReset}
                         >
-                            Reset
+ {t("filters.reset")}                             
                         </Button>
 
-                        <Button onClick={handleApply}>
-                            Apply
+                        <Button onClick={handleApply} className="rounded-md">
+                            {t("filters.apply")}
                         </Button>
 
                     </div>

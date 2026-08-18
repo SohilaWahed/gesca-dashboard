@@ -1,5 +1,5 @@
 import type z from "zod";
-import type { ForgotPasswordSchema, loginSchema, registerSchema, ResetPasswordSchema } from "@/schemas/auth.schema";
+import type { forgotPasswordSchema, loginSchema, registerSchema, resetPasswordSchema } from "@/schemas/auth.schema";
 
 
 export interface AuthContextType {
@@ -36,6 +36,7 @@ export interface RegisterResponse {
     message: string
     data: User
 }
+
 export interface User {
     id: string
     email: string
@@ -43,7 +44,7 @@ export interface User {
     lastName: string
 }
 
-export interface forgotPasswordResponse {
+export interface ForgotPasswordResponse {
     success: boolean,
     message: string
 }
@@ -52,6 +53,7 @@ export type RegisterPayload = z.infer<typeof registerSchema>
 
 export type LoginPayload = z.infer<typeof loginSchema>
 
-export  type ForgotPasswordPayload = z.infer<typeof ForgotPasswordSchema>
+export  type ForgotPasswordPayload = z.infer<typeof forgotPasswordSchema>
 
-export  type ResetPasswordPayload = z.infer<typeof ResetPasswordSchema>
+export  type ResetPasswordPayload = z.infer<typeof resetPasswordSchema>
+

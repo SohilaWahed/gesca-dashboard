@@ -19,7 +19,7 @@ import LanguageBtn from "@/components/common/LanguageBtn"
 import InputWithIcon from "@/components/common/InputWithIcon"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ResetPasswordSchema } from "@/schemas/auth.schema"
+import { resetPasswordSchema } from "@/schemas/auth.schema"
 import { useTranslation } from "react-i18next"
 import { resetPassword } from "@/apis/auth.api"
 import { useState } from "react"
@@ -41,7 +41,7 @@ export default function ResetPassword() {
             password: '',
             confirmPassword: ''
         },
-        resolver: zodResolver(ResetPasswordSchema)
+        resolver: zodResolver(resetPasswordSchema)
     })
 
     const onSubmit = async (data: ResetPasswordPayload) => {

@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 import type { StatisticItem } from "@/types/Statistics.type";
 
-
 interface StatisticsProps {
     statistics: StatisticItem[],
     columns:number
 }
 export default function StatisticCard({statistics , columns}:StatisticsProps) {
+   
     return (
         <div   className={cn(
                 "grid grid-cols-1 gap-4 ",
@@ -32,7 +32,7 @@ export default function StatisticCard({statistics , columns}:StatisticsProps) {
                         </span>
                         <div className="min-w-0">
                             <p className="truncate text-sm text-muted-foreground">
-                                {item.label}
+                              {item.label}
                             </p>
 
                             <h3 className="mt-1 text-2xl font-bold">
